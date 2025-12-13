@@ -136,10 +136,10 @@ npm run build  # Build the project (TypeScript only)
 ### Dependencies
 
 - **express** - Web framework
-- **dotenv** - Environment variables
 - **cors** - Cross-origin resource sharing
-- **morgan** - HTTP request logger
-- **validator** - Data validation
+- **cookie-parser** - Parse cookies
+- **jsonwebtoken** - JWT authentication
+- **express-rate-shield** - Rate limiting
 
 ### Dev Dependencies
 
@@ -159,6 +159,17 @@ PORT=3000
 NODE_ENV=development
 DB_URI=your_database_uri
 ```
+
+#### 🎮 Easter Egg: Leet Number
+
+**Default Port: 3802** - This is Exon in leet speak!
+
+- E → 3
+- X → 8
+- O → 0
+- N → 2
+
+So **EXON = 3802** ✨
 
 ### TypeScript Configuration
 
@@ -209,6 +220,8 @@ throw new apiError(400, "Invalid request");
 - **Error Handling** - Use the provided error utilities
 - **Environment Variables** - Store sensitive data in `.env`
 - **Database** - Organize database models in the models folder
+- **Rate Limiting** - Default rate limiter is configured (15 min window, 5 requests)
+- **Security** - CORS and cookie parsing enabled for secure communication
 
 ## Troubleshooting
 
@@ -228,6 +241,10 @@ Change the PORT in your `.env` file or modify the port number in `src/index.ts`
 ### TypeScript Compilation Errors
 
 Ensure you have TypeScript installed: `npm install -D typescript`
+
+### Rate Limiter Not Working
+
+Make sure `express-rate-shield` is installed: `npm install express-rate-shield`
 
 ## Compatibility
 
@@ -253,6 +270,9 @@ Contributions are welcome! Here are the ways you can contribute:
 - Support for TypeScript and JavaScript projects
 - Auto-installation of dependencies
 - Full project structure generation
+- Built-in rate limiting
+- JWT authentication support
+- Cookie parser middleware
 
 ## License
 
@@ -262,13 +282,13 @@ MIT License - feel free to use this in your projects.
 
 For issues, feature requests, or questions:
 
-- Create an issue on GitHub
+- Create an issue on [GitHub](https://github.com/arpitbhatia23/exon/issues)
 - Check existing documentation
 - Review project examples
 
 ## Keywords
 
-`express` `cli` `boilerplate` `backend` `typescript` `javascript` `nodejs` `rest-api` `generator` `scaffold`
+`express` `cli` `boilerplate` `backend` `typescript` `javascript` `nodejs` `rest-api` `generator` `scaffold` `template` `starter` `3802` `leet-speak`
 
 ## About
 

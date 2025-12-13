@@ -1,0 +1,71 @@
+{
+  "name": "exon",
+  "version": "1.0.0",
+  "description": "CLI tool to generate production-ready Express.js backend boilerplate for TypeScript and JavaScript",
+  "main": "./dist/index.js",
+  "bin": {
+    "exon": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "express",
+    "cli",
+    "boilerplate",
+    "backend",
+    "typescript",
+    "javascript",
+    "nodejs",
+    "rest-api",
+    "generator",
+    "scaffold",
+    "template",
+    "starter",
+    "project-generator",
+    "web-framework"
+  ],
+  "author": {
+    "name": "Arpit Bhatia",
+    "email": "aurpitaurpit@gmail.com",
+    "url": "https://github.com/arpitbhatia23"
+  },
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arpitbhatia23/exon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/arpitbhatia23/exon/issues",
+    "email": "aurpitaurpit@gmail.com"
+  },
+  "homepage": "https://github.com/arpitbhatia23/exon#readme",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "files": [
+    "dist",
+    "templates",
+    "README.md",
+    "LICENSE"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@types/commander": "^2.12.0",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^25.0.1",
+    "chalk": "^5.6.2",
+    "commander": "^14.0.2",
+    "figlet": "^1.9.4",
+    "fs-extra": "^11.3.2",
+    "inquirer": "^13.0.2",
+    "ora": "^9.0.0",
+    "typescript": "^5.9.3"
+  }
+}
