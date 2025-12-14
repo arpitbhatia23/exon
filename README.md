@@ -1,7 +1,7 @@
 # Exon - Express Backend Boilerplate CLI
 
-[![npm version](https://img.shields.io/npm/v/exon.svg)](https://www.npmjs.com/package/exon)
-[![npm downloads](https://img.shields.io/npm/dm/exon.svg)](https://www.npmjs.com/package/exon)
+[![npm version](https://img.shields.io/npm/v/exon-cli.svg)](https://www.npmjs.com/package/exon-cli)
+[![npm downloads](https://img.shields.io/npm/dm/exon-cli.svg)](https://www.npmjs.com/package/exon-cli)
 [![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org)
 
@@ -145,7 +145,6 @@ npm run build  # Build the project (TypeScript only)
 
 - **typescript** - Type checking (TypeScript projects)
 - **tsx** - TypeScript execution (TypeScript projects)
-- **nodemon** - Auto-reload on file changes
 - **@types/express** - TypeScript definitions
 
 ## Configuration

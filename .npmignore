@@ -1,0 +1,8 @@
+# Ignore all node_modules
+node_modules/
+
+# Ignore node_modules inside template
+**/node_modules/
+# Ignore dev files if needed
+*.log
+.DS_Store

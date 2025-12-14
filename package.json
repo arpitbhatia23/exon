@@ -1,6 +1,6 @@
 {
-  "name": "exon",
-  "version": "1.0.0",
+  "name": "exon-cli",
+  "version": "1.0.1",
   "description": "CLI tool to generate production-ready Express.js backend boilerplate for TypeScript and JavaScript",
   "main": "./dist/index.js",
   "bin": {
@@ -51,7 +51,8 @@
     "dist",
     "templates",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "!templates/node-express-template-ts/node_modules/**"
   ],
   "publishConfig": {
     "access": "public"
