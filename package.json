@@ -52,7 +52,8 @@
     "templates",
     "README.md",
     "LICENSE",
-    "!templates/node-express-template-ts/node_modules/**"
+    "!templates/node-express-template-ts/node_modules/**",
+    "!templates/node-express-template-js/node_modules/**"
   ],
   "publishConfig": {
     "access": "public"

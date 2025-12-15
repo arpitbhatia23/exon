@@ -1,8 +1,6 @@
-# Ignore all node_modules
-node_modules/
-
-# Ignore node_modules inside template
-**/node_modules/
-# Ignore dev files if needed
+node_modules
+**/node_modules
+templates/**/node_modules
+npm-debug.log
 *.log
 .DS_Store
