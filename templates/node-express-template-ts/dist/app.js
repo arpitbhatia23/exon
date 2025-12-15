@@ -9,6 +9,8 @@ const express_1 = __importDefault(require("express")); // Express framework for 
 const cors_1 = __importDefault(require("cors")); // Middleware to handle Cross-Origin Resource Sharing
 const cookie_parser_1 = __importDefault(require("cookie-parser")); // Middleware to parse cookies
 const express_rate_shield_1 = require("express-rate-shield");
+const swagger_config_js_1 = require("./swagger.config.js");
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 // Initialize Express app
 const app = (0, express_1.default)();
 exports.app = app;
@@ -19,7 +21,7 @@ exports.app = app;
 // message: response sent when user exceeds the limit
 const limiter = new express_rate_shield_1.rateLimiter({
     windowMs: 15 * 60 * 1000,
-    max: 5,
+    max: 500,
     message: { error: "Too many requests, please try again later." },
 });
 // Apply rate limiter middleware to all routes
@@ -39,7 +41,11 @@ app.use(express_1.default.static("public"));
 app.use((0, cookie_parser_1.default)());
 // -------------------- Routes --------------------
 // Import your route definitions
-const route_1 = __importDefault(require("./routes/route"));
+const index_route_1 = __importDefault(require("./routes/index.route"));
+const heathCheck_route_1 = __importDefault(require("./routes/heathCheck.route"));
 // Use the imported routes
-app.use(route_1.default);
+app.use(index_route_1.default);
+app.use("/api/v1", heathCheck_route_1.default);
+// -------------------- api docs --------------------
+app.use("/docs", swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_config_js_1.swaggerSpec));
 //# sourceMappingURL=app.js.map

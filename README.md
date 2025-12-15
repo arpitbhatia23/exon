@@ -94,6 +94,10 @@ Standardized JSON response format for all endpoints ensuring consistency.
 
 Wrapper function for handling asynchronous route handlers with automatic error catching.
 
+### Swagger API Documentation
+
+Automatic API documentation with Swagger/OpenAPI 3.0. Access the interactive API docs at `/docs` when your server is running.
+
 ### Middleware Support
 
 Pre-configured middleware directory for authentication, validation, and custom middleware.
@@ -131,7 +135,39 @@ npm start      # Start the development server
 npm run build  # Build the project (TypeScript only)
 ```
 
-## What's Included
+## API Documentation
+
+### Swagger/OpenAPI Docs
+
+Your Exon project includes automatic API documentation powered by Swagger UI.
+
+**Access the docs:** Navigate to `http://localhost:3802/docs` (or your configured port) in your browser.
+
+**Documenting your routes:**
+
+Add JSDoc comments to your route handlers with OpenAPI-compatible annotations:
+
+```typescript
+/**
+ * @swagger
+ * /api/v1/users:
+ *   get:
+ *     summary: Get all users
+ *     description: Retrieve a list of all users
+ *     responses:
+ *       200:
+ *         description: Success
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ */
+router.get("/users", (req, res) => {
+  // Your route logic
+});
+```
+
+The Swagger configuration automatically scans all route files in `src/routes/*` and generates interactive documentation.
 
 ### Dependencies
 

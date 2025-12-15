@@ -3,6 +3,8 @@ import express from "express"; // Express framework for building backend APIs
 import cors from "cors"; // Middleware to handle Cross-Origin Resource Sharing
 import cookieParser from "cookie-parser"; // Middleware to parse cookies
 import { rateLimiter } from "express-rate-shield";
+import { swaggerSpec } from "./swagger.config.js";
+import swaggerUi from "swagger-ui-express";
 // Initialize Express app
 const app = express();
 
@@ -14,7 +16,7 @@ const app = express();
 // message: response sent when user exceeds the limit
 const limiter = new rateLimiter({
   windowMs: 15 * 60 * 1000,
-  max: 5,
+  max: 500,
   message: { error: "Too many requests, please try again later." },
 });
 
@@ -43,9 +45,15 @@ app.use(cookieParser());
 // -------------------- Routes --------------------
 
 // Import your route definitions
-import indexRouter from "./routes/route";
+import indexRouter from "./routes/index.route";
+import healthCheckRoute from "./routes/heathCheck.route";
 // Use the imported routes
 app.use(indexRouter);
+app.use("/api/v1", healthCheckRoute);
+
+// -------------------- api docs --------------------
+
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // -------------------- Export app --------------------
 
