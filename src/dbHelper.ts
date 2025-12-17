@@ -34,8 +34,12 @@ export function appendEnv(targetDir: string, envPath: string) {
 export function mergeDbConfigToRoot(targetDir: string, templateDir: string) {
   fs.copySync(templateDir, targetDir, {
     filter: (src) =>
-      !["env.append", "deps.json", "index.ts", "index.js"].some((f) =>
-        src.includes(f)
-      ),
+      ![
+        "env.append",
+        "deps.json",
+        "index.ts",
+        "index.js",
+        "schema.prisma",
+      ].some((f) => src.includes(f)),
   });
 }
