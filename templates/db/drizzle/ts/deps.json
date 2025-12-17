@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "drizzle-orm": "^0.30.0",
+    "pg": "^8.11.0"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.21.0",
+    "@types/node": "^20.6.0",
+    "@types/pg": "^8.6.6"
+  },
+  "scripts": {
+    "migrate": "drizzle-kit migrate",
+    "generate": "drizzle-kit generate"
+  }
+}

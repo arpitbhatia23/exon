@@ -9,6 +9,8 @@ import { fileURLToPath } from "url";
 import inquirer from "inquirer";
 import { execSync } from "child_process";
 import { ExitPromptError } from "@inquirer/core";
+import { resolveDbTemplate } from "./resolveDbTemplates.js";
+import { appendEnv, mergeDbConfigToRoot, mergeDeps } from "./dbHelper.js";
 const program = new Command();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -33,12 +35,21 @@ program
           message: chalk.blue("Which language do you want to use?"), // colored question
           choices: ["TypeScript", "JavaScript"],
         },
+
+        {
+          type: "select",
+          name: "database",
+          message: chalk.blue("Which database orm do you want to use?"), // colored question
+          choices: ["Mongoose", "Prisma", "Drizzle", "None"],
+        },
       ]);
 
       const templateName =
         answer.language === "TypeScript"
           ? "node-express-template-ts"
           : "node-express-template-js";
+
+      const db = answer.database;
 
       const templateDir = path.join(__dirname, "../templates", templateName);
       const targetDir = path.join(process.cwd(), name);
@@ -47,11 +58,31 @@ program
       }
       fs.copySync(templateDir, targetDir, {
         overwrite: true,
-        filter: (src) => !src.includes("node_modules"),
+        filter: (src) => !["node_modules", "dist"].some((f) => src.includes(f)),
       });
       console.log(
         chalk.green(`✅ ${answer.language} project created in ${targetDir}`)
       );
+
+      //  merge db with over template
+
+      const dbTemplate = resolveDbTemplate(answer);
+
+      if (dbTemplate) {
+        const dbDir = path.join(__dirname, "../templates/db", dbTemplate);
+        fs.copySync(dbDir, `${targetDir}/src/db`, {
+          filter: (src) =>
+            ![
+              "env.append",
+              "deps.json",
+              "drizzle.config.js",
+              "drizzle.config.ts",
+            ].some((f) => src.includes(f)),
+        });
+        mergeDeps(targetDir, path.join(dbDir, "deps.json"));
+        appendEnv(targetDir, path.join(dbDir, "env.append"));
+        mergeDbConfigToRoot(targetDir, dbDir);
+      }
 
       const pkgPath = path.join(targetDir, "package.json");
 
