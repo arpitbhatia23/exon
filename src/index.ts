@@ -17,7 +17,7 @@ const __dirname = path.dirname(__filename);
 program
   .name("exon")
   .description("CLI to generate Express backend boilerplate")
-  .version("1.1.2");
+  .version("1.1.3");
 
 console.log(
   chalk.yellow(figlet.textSync("EXON", { horizontalLayout: "full" }))
@@ -51,7 +51,7 @@ program
 
       const db = answer.database;
 
-      const templateDir = path.join(__dirname, "../templates", templateName);
+      const templateDir = path.resolve(__dirname, "../templates", templateName);
       const targetDir = path.join(process.cwd(), name);
       if (!fs.existsSync(templateDir)) {
         console.log(chalk.red("Template Not Found!"));
@@ -60,7 +60,7 @@ program
         overwrite: true,
         filter: (src) => !["node_modules", "dist"].some((f) => src.includes(f)),
       });
-
+      console.log(templateDir, targetDir);
       await new Promise((r) => setTimeout(r, 500));
 
       if (!fs.existsSync(targetDir)) {
