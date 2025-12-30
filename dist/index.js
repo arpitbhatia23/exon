@@ -17,7 +17,7 @@ const __dirname = path.dirname(__filename);
 program
     .name("exon")
     .description("CLI to generate Express backend boilerplate")
-    .version("1.1.3");
+    .version("1.1.4");
 console.log(chalk.yellow(figlet.textSync("EXON", { horizontalLayout: "full" })));
 program
     .command("create <name>")
