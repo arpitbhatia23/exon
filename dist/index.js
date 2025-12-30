@@ -51,7 +51,10 @@ program
             overwrite: true,
             filter: (src) => !["node_modules", "dist"].some((f) => src.includes(f)),
         });
-        await new Promise((r) => setTimeout(r, 10));
+        await new Promise((r) => setTimeout(r, 500));
+        if (!fs.existsSync(targetDir)) {
+            throw Error(`something went wrong while creating ${targetDir}`);
+        }
         console.log(chalk.green(`✅ ${answer.language} project created in ${targetDir}`));
         //  merge db with over template
         const dbTemplate = resolveDbTemplate(answer);
