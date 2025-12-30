@@ -17,7 +17,7 @@ const __dirname = path.dirname(__filename);
 program
     .name("exon")
     .description("CLI to generate Express backend boilerplate")
-    .version("1.1.4");
+    .version("1.1.5");
 console.log(chalk.yellow(figlet.textSync("EXON", { horizontalLayout: "full" })));
 program
     .command("create <name>")
@@ -47,11 +47,18 @@ program
         if (!fs.existsSync(templateDir)) {
             console.log(chalk.red("Template Not Found!"));
         }
-        fs.copySync(templateDir, targetDir, {
-            overwrite: true,
-            filter: (src) => !["node_modules", "dist"].some((f) => src.includes(f)),
-        });
-        console.log("template directorand tagert directory", templateDir, targetDir);
+        try {
+            fs.copySync(templateDir, targetDir, {
+                overwrite: true,
+                filter: (src) => {
+                    const basename = path.basename(src);
+                    return basename !== "node_modules" && basename !== "dist";
+                },
+            });
+        }
+        catch (error) {
+            console.log(error);
+        }
         await new Promise((r) => setTimeout(r, 500));
         if (!fs.existsSync(targetDir)) {
             throw Error(`something went wrong while creating ${targetDir}`);
