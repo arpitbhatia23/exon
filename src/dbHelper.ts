@@ -2,9 +2,17 @@ import fs from "fs-extra";
 import path from "path";
 
 export function mergeDeps(targetDir: string, depsPath: string) {
+  console.log(targetDir);
   if (!fs.existsSync(depsPath)) return;
 
   const pkgPath = path.join(targetDir, "package.json");
+
+  if (!fs.existsSync(pkgPath)) {
+    throw new Error(
+      `package.json not found at ${pkgPath}. Template copy may have failed.`
+    );
+  }
+
   const pkg = fs.readJsonSync(pkgPath);
   const deps = fs.readJsonSync(depsPath);
 

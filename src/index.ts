@@ -79,6 +79,7 @@ program
               "drizzle.config.ts",
             ].some((f) => src.includes(f)),
         });
+
         mergeDeps(targetDir, path.join(dbDir, "deps.json"));
         appendEnv(targetDir, path.join(dbDir, "env.append"));
         mergeDbConfigToRoot(targetDir, dbDir);
