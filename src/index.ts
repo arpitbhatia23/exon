@@ -69,8 +69,6 @@ program
         console.log(error);
       }
 
-      await new Promise((r) => setTimeout(r, 500));
-
       if (!fs.existsSync(targetDir)) {
         throw Error(`something went wrong while creating ${targetDir}`);
       }
