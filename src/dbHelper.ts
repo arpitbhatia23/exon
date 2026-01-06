@@ -2,8 +2,6 @@ import fs from "fs-extra";
 import path from "path";
 
 export function mergeDeps(targetDir: string, depsPath: string) {
-  console.log(`target directory`, targetDir);
-
   if (!fs.existsSync(depsPath)) return;
 
   const pkgPath = path.join(targetDir, "package.json");

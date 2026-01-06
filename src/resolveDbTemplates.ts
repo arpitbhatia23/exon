@@ -5,8 +5,6 @@ type answeroption = {
 
 export function resolveDbTemplate(a: answeroption) {
   if (a.database === "None") return null;
-  console.log(a.database);
-
   const lang = a.language === "TypeScript" ? "ts" : "js";
 
   if (a.database === "Mongoose") {

@@ -2,18 +2,25 @@
 import { Command } from "commander";
 import chalk from "chalk";
 import figlet from "figlet";
-import ora from "ora";
 import fs from "fs-extra";
 import path from "path";
 import { fileURLToPath } from "url";
-import inquirer from "inquirer";
-import { execSync } from "child_process";
+import { execSync, spawn } from "child_process";
 import { ExitPromptError } from "@inquirer/core";
 import { resolveDbTemplate } from "./resolveDbTemplates.js";
 import { appendEnv, mergeDbConfigToRoot, mergeDeps } from "./dbHelper.js";
 const program = new Command();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+import {
+  select,
+  cancel,
+  isCancel,
+  intro,
+  outro,
+  spinner,
+} from "@clack/prompts";
 program
   .name("exon")
   .description("CLI to generate Express backend boilerplate")
@@ -27,37 +34,50 @@ program
   .command("create <name>")
   .description("create a new express project")
   .action(async (name: string) => {
+    intro(chalk.cyan("EXON → Initializing project...."));
+
+    const s = spinner({ indicator: "dots" });
+
     try {
-      const answer = await inquirer.prompt([
-        {
-          type: "select",
-          name: "language",
-          message: chalk.blue("Which language do you want to use?"), // colored question
-          choices: ["TypeScript", "JavaScript"],
-        },
+      const language = await select({
+        message: "Which language do you want to use?",
+        options: [
+          { value: "TypeScript", label: "TypeScript" },
+          { value: "JavaScript", label: "JavaScript" },
+        ],
+      });
 
-        {
-          type: "select",
-          name: "database",
-          message: chalk.blue("Which database orm do you want to use?"), // colored question
-          choices: ["Mongoose", "Prisma", "Drizzle", "None"],
-        },
-      ]);
+      if (isCancel(language)) {
+        cancel("Project creation cancelled.");
+        process.exit(0);
+      }
+      const database = await select({
+        message: "Which database ORM do you want to use?",
+        options: [
+          { value: "Mongoose", label: "Mongoose" },
+          { value: "Prisma", label: "Prisma" },
+          { value: "Drizzle", label: "Drizzle" },
+          { value: "None", label: "None" },
+        ],
+      });
 
+      if (isCancel(database)) {
+        cancel("Project creation cancelled.");
+        process.exit(0);
+      }
       const templateName =
-        answer.language === "TypeScript"
+        language === "TypeScript"
           ? "node-express-template-ts"
           : "node-express-template-js";
-
-      const db = answer.database;
 
       const templateDir = path.resolve(__dirname, "../templates", templateName);
       const targetDir = path.resolve(process.cwd(), name);
       if (!fs.existsSync(templateDir)) {
-        console.log(chalk.red("Template Not Found!"));
+        cancel("Template Not Found!");
       }
 
       try {
+        s.start("Creating project structure...");
         fs.copySync(templateDir, targetDir, {
           overwrite: true,
           filter: (src) => {
@@ -65,20 +85,19 @@ program
             return basename !== "node_modules" && basename !== "dist";
           },
         });
+        s.stop("Project structure created");
       } catch (error) {
-        console.log(error);
+        s.stop("Failed to create project structure", 1);
       }
 
       if (!fs.existsSync(targetDir)) {
-        throw Error(`something went wrong while creating ${targetDir}`);
+        cancel(`something went wrong while creating ${targetDir}`);
       }
-      console.log(
-        chalk.green(`✅ ${answer.language} project created in ${targetDir}`)
-      );
 
-      //  merge db with over template
-
-      const dbTemplate = resolveDbTemplate(answer);
+      const dbTemplate = resolveDbTemplate({
+        language: language,
+        database: database,
+      });
 
       if (dbTemplate) {
         const dbDir = path.join(__dirname, "../templates/db", dbTemplate);
@@ -100,26 +119,34 @@ program
       const pkgPath = path.join(targetDir, "package.json");
 
       if (fs.existsSync(pkgPath)) {
-        const spinner = ora({
-          text: "Installing dependencies...",
-          color: "cyan",
-        }).start();
+        s.start("Installing dependencies...");
+
         try {
-          execSync("npm install", { cwd: targetDir, stdio: "inherit" });
-          spinner.succeed(chalk.green("Dependencies installed successfully!"));
+          await new Promise<void>((resolve, reject) => {
+            const child = spawn("npm", ["install", "--loglevel=error"], {
+              cwd: targetDir,
+              stdio: "ignore",
+              shell: true,
+            });
+
+            child.on("close", (code) => {
+              if (code !== 0) reject(new Error("Install failed"));
+              else resolve();
+            });
+          });
+
+          s.stop("Dependencies installed successfully!");
         } catch (err) {
-          spinner.fail(chalk.red("Failed to install dependencies."));
+          s.stop("Failed to install dependencies.", 1);
+          process.exit(1);
         }
       }
-      console.log(
-        chalk.green("Done! Run 'npm start' inside your project folder.")
-      );
+      outro(chalk.green("Done! Run 'npm start' inside your project folder."));
     } catch (error) {
-      if (error instanceof ExitPromptError) {
-        console.log("\n👋 Project creation cancelled by user.");
+      if (error) {
+        cancel("\n👋 Project creation cancelled by user.");
         process.exit(0); // Exit cleanly
       }
-      throw error;
     }
   });
 program.parse(process.argv);
