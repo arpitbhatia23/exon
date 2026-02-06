@@ -16,7 +16,7 @@ import { select, cancel, isCancel, intro, outro, spinner, } from "@clack/prompts
 program
     .name("exon")
     .description("CLI to generate Express backend boilerplate")
-    .version("1.1.5");
+    .version("1.1.6");
 console.log(chalk.yellow(figlet.textSync("EXON", { horizontalLayout: "full" })));
 program
     .command("create <name>")

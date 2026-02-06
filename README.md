@@ -1,7 +1,7 @@
 # ⚡ Exon - Express Backend Boilerplate Generator
 
-> **Generate Production-Ready Express.js Backends in Seconds**  
-> A powerful CLI tool for scaffolding TypeScript/JavaScript Express backends with best practices, modern tooling, and zero configuration needed.
+> **Generate Production-Ready Express.js Backends with Prisma, Drizzle, or Mongoose in Seconds**  
+> A powerful CLI tool (NPM Package) for scaffolding TypeScript/JavaScript Express APIs. Includes patterns for PostgreSQL, MongoDB, MySQL, and more with zero configuration needed.
 
 [![npm version](https://img.shields.io/npm/v/exon-cli.svg)](https://www.npmjs.com/package/exon-cli)
 [![npm downloads](https://img.shields.io/npm/dm/exon-cli.svg)](https://www.npmjs.com/package/exon-cli)
@@ -13,28 +13,28 @@
 
 ## ✨ Features
 
-- ⚡ **Instant Setup** - Zero configuration, pre-built project structure
+- ⚡ **Instant Setup** - Zero configuration, pre-built project structure for REST APIs
 - 🔄 **TypeScript & JavaScript** - Full support for both languages with proper tooling
-- 🎯 **Production-Ready** - Best practices, error handling, logging included
-- 📦 **Database Ready** - Prepared structures for MongoDB, PostgreSQL, MySQL, etc.
+- 🎯 **Production-Ready** - Best practices, error handling, logging included and scalable architecture
+- 📦 **Database Ready** - First-class support for **Prisma, Drizzle, and Mongoose**
 - 🛡️ **Error Handling** - Built-in API error and response utilities
-- 🔧 **Middleware Templates** - Pre-configured middleware directories
-- 📚 **Database Integrations** - Starter templates for Prisma, Drizzle, and Mongoose
-- 🚀 **Swagger/OpenAPI** - Automatic API documentation included
-- 🌍 **Modern Stack** - Latest Express.js with async/await support
+- 🔧 **Middleware Templates** - Pre-configured authentication, validation, and security middleware
+- 📚 **Database Integrations** - Connect to PostgreSQL, MongoDB, MySQL, and SQLite effortlessly
+- 🚀 **Swagger/OpenAPI** - Automatic API documentation generation
+- 🌍 **Modern Stack** - Latest Express.js features with async/await support
 
 ## Installation
 
 Install Exon globally from npm:
 
 ```bash
-npm install -g exon
+npm install -g exon-cli
 ```
 
 Or use with npx without installation:
 
 ```bash
-npx exon create my-app
+npx exon-cli create my-app
 ```
 
 ## Quick Start
@@ -42,7 +42,7 @@ npx exon create my-app
 ### 1. Create a New Project
 
 ```bash
-exon create my-express-app
+exon-cli create my-express-app
 ```
 
 ### 2. Choose Your Language
@@ -110,6 +110,20 @@ Pre-configured middleware directory for authentication, validation, and custom m
 ### Database Ready
 
 Prepared folder structure for integrating your preferred database (MongoDB, PostgreSQL, MySQL, etc.).
+
+## 🚀 How It Works
+
+ Exon is more than just a template; it's a smart generator that builds a custom project based on your preferences.
+
+1.  **Initialize**: Run `npx exon create my-app`.
+2.  **Select Language**: Choose between **TypeScript** (for type safety) or **JavaScript**.
+3.  **Select Database**: Pick your ORM/ODM:
+    -   **Prisma** (Great for SQL databses like PostgreSQL, MySQL)
+    -   **Drizzle** (Lightweight, type-safe SQL)
+    -   **Mongoose** (Perfect for MongoDB)
+    -   **None** (If you want to configure it yourself)
+4.  **Auto-Install**: Exon automatically creates the structure, configures the database client, and installs dependencies.
+5.  **Start Coding**: You get a running server with Swagger docs immediately!
 
 ## Usage Examples
 
