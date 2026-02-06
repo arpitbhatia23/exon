@@ -1,6 +1,6 @@
 {
   "name": "exon-cli",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "Production-ready Express.js backend generator. Scaffolds TypeScript/JavaScript projects with patterns for Prisma, Drizzle, Mongoose, and more.",
   "main": "./dist/index.js",
   "bin": {
