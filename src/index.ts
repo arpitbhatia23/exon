@@ -5,8 +5,7 @@ import figlet from "figlet";
 import fs from "fs-extra";
 import path from "path";
 import { fileURLToPath } from "url";
-import { execSync, spawn } from "child_process";
-import { ExitPromptError } from "@inquirer/core";
+import { spawn } from "child_process";
 import { resolveDbTemplate } from "./resolveDbTemplates.js";
 import { appendEnv, mergeDbConfigToRoot, mergeDeps } from "./dbHelper.js";
 const program = new Command();
@@ -27,7 +26,7 @@ program
   .version("1.1.6");
 
 console.log(
-  chalk.yellow(figlet.textSync("EXON", { horizontalLayout: "full" }))
+  chalk.yellow(figlet.textSync("EXON", { horizontalLayout: "full" })),
 );
 
 program

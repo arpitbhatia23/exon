@@ -20,7 +20,10 @@
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "ts-node": "^10.9.2",
-    "tsx": "^4.21.0"
+    "tsx": "^4.21.0",
+    "winston": "^3.19.0",
+    "winston-daily-rotate-file": "^5.0.0",
+    "morgan": "^1.10.1"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.3",
@@ -30,6 +33,7 @@
     "@types/node": "^25.0.1",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.8",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "@types/morgan": "^1.9.10"
   }
 }

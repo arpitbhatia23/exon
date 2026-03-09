@@ -40,7 +40,9 @@ app.use(express.static("public"));
 // Parse cookies attached to incoming requests
 app.use(cookieParser());
 
-// -------------------- Routes --------------------
+// -------------------- logger --------------------
+import morganLogger from "./middleware/morgan.middleware.js";
+app.use(morganLogger);
 
 // Import your route definitions
 import indexRouter from "./routes/index.route.js";
