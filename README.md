@@ -1,448 +1,374 @@
-# ⚡ Exon - Express Backend Boilerplate Generator
+# ⚡ Exon — Express Backend Boilerplate Generator
 
-> **Generate Production-Ready Express.js Backends with Prisma, Drizzle, or Mongoose in Seconds**  
-> A powerful CLI tool (NPM Package) for scaffolding TypeScript/JavaScript Express APIs. Includes patterns for PostgreSQL, MongoDB, MySQL, and more with zero configuration needed.
+> **The fastest way to create production-ready Express.js APIs.**
+> Think **Create React App — but for backend APIs.**
 
-[![npm version](https://img.shields.io/npm/v/exon-cli.svg)](https://www.npmjs.com/package/exon-cli)
-[![npm downloads](https://img.shields.io/npm/dm/exon-cli.svg)](https://www.npmjs.com/package/exon-cli)
-[![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-[![Node.js](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org)
-[![GitHub stars](https://img.shields.io/github/stars/arpitbhatia23/exon.svg?style=social)](https://github.com/arpitbhatia23/exon)
+Exon is a powerful **CLI tool** that generates a **production-ready Express.js backend** with best practices, logging, Swagger docs, and database support in seconds.
 
-**Exon** eliminates boilerplate and gets you building Express.js backends immediately. Pre-configured with industry best practices, error handling utilities, middleware templates, and database integration starters.
+Instead of spending **30+ minutes setting up an Express backend**, Exon gives you a **fully structured project instantly**.
 
-## ✨ Features
+```
+npx exon-cli create my-api
+cd my-api
+npm start
+```
 
-- ⚡ **Instant Setup** - Zero configuration, pre-built project structure for REST APIs
-- 🔄 **TypeScript & JavaScript** - Full support for both languages with proper tooling
-- 🎯 **Production-Ready** - Best practices, error handling, logging included and scalable architecture
-- 📦 **Database Ready** - First-class support for **Prisma, Drizzle, and Mongoose**
-- 🛡️ **Error Handling** - Built-in API error and response utilities
-- 🔧 **Middleware Templates** - Pre-configured authentication, validation, and security middleware
-- 📚 **Database Integrations** - Connect to PostgreSQL, MongoDB, MySQL, and SQLite effortlessly
-- 🚀 **Swagger/OpenAPI** - Automatic API documentation generation
-- 🌍 **Modern Stack** - Latest Express.js features with async/await support
+## Demo
 
-## Installation
+[![asciicast](https://asciinema.org/a/kbs72JTWSFpOkuNn.svg)](https://asciinema.org/a/kbs72JTWSFpOkuNn)
 
-Install Exon globally from npm:
+🚀 Your backend is ready.
 
-```bash
+---
+
+# ⭐ Why Developers Love Exon
+
+Setting up a backend usually means installing and configuring:
+
+- Express
+- TypeScript
+- Logger
+- Error handling
+- Swagger documentation
+- Database ORM
+- Middleware structure
+
+Exon **automatically configures everything**.
+
+⚡ Setup time: **30 seconds**
+
+---
+
+# ✨ Features
+
+- ⚡ **Instant Backend Setup**
+- 🔄 **TypeScript & JavaScript Support**
+- 📚 **Swagger/OpenAPI Documentation**
+- 🧠 **Production Logging System**
+- 🛡️ **Error Handling Utilities**
+- 🔐 **JWT Authentication Ready**
+- 🗄️ **Database Ready**
+- 📦 **Clean Project Structure**
+- 🚀 **Production Best Practices**
+
+---
+
+# 📦 Installation
+
+Install globally:
+
+```
 npm install -g exon-cli
 ```
 
-Or use with npx without installation:
+Or run directly with **npx**:
 
-```bash
+```
 npx exon-cli create my-app
 ```
 
-## Quick Start
+---
 
-### 1. Create a New Project
+# 🚀 Quick Start
 
-```bash
+### 1️⃣ Create Project
+
+```
 exon-cli create my-express-app
 ```
 
-### 2. Choose Your Language
+### 2️⃣ Choose Language
 
-The CLI will prompt you to select your preferred language:
+Select:
 
-- **TypeScript** - For type-safe development
-- **JavaScript** - For lightweight projects
+- TypeScript
+- JavaScript
 
-### 3. Start Developing
+### 3️⃣ Choose Database
 
-```bash
+Options:
+
+- Prisma
+- Drizzle
+- Mongoose
+- None
+
+### 4️⃣ Start Server
+
+```
 cd my-express-app
 npm start
 ```
 
-Your Express server will be running on the configured port with full logging enabled.
+Server runs instantly with **Swagger docs enabled**.
 
-## Project Structure
+---
 
-Exon generates a well-organized project structure:
+# 🎬 Example Workflow
 
 ```
-my-express-app/
-├── src/
-│   ├── controllers/          # Request handlers
-│   ├── routes/              # API route definitions
-│   ├── middleware/          # Custom middleware
-│   ├── models/              # Database models
-│   ├── utils/               # Utility functions
-│   │   ├── apiError.ts      # Error handling
-│   │   ├── apiResponse.ts   # Response formatting
-│   │   └── asyncHandler.ts  # Async error wrapper
-│   ├── helpers/             # Helper functions
-│   ├── db/                  # Database configuration
-│   ├── app.ts              # Express app setup
-│   └── index.ts            # Server entry point
+npx exon-cli create my-api
+cd my-api
+npm start
+```
+
+Output:
+
+```
+Server running on http://localhost:3802
+Swagger Docs: http://localhost:3802/docs
+```
+
+---
+
+# 📁 Generated Project Structure
+
+```
+my-express-app
+│
+├── src
+│   ├── controllers
+│   ├── routes
+│   ├── middleware
+│   ├── models
+│   ├── helpers
+│   ├── db
+│   ├── utils
+│   │   ├── apiError.ts
+│   │   ├── apiResponse.ts
+│   │   └── asyncHandler.ts
+│   ├── app.ts
+│   └── index.ts
+│
 ├── package.json
-├── tsconfig.json (TypeScript only)
+├── tsconfig.json
 └── README.md
 ```
 
-## Included Utilities
+---
 
-### API Error Handling
+# 🔎 Production Logging (Built-In)
 
-Consistent error response handling across your application with proper HTTP status codes.
+Every Exon project includes **production-ready logging** powered by:
 
-### API Response Format
+- Morgan → HTTP request logging
+- Winston → application logging
+- Daily log rotation
 
-Standardized JSON response format for all endpoints ensuring consistency.
+### Log Output Example
 
-### Async Handler
-
-Wrapper function for handling asynchronous route handlers with automatic error catching.
-
-### Swagger API Documentation
-
-Automatic API documentation with Swagger/OpenAPI 3.0. Access the interactive API docs at `/docs` when your server is running.
-
-### Middleware Support
-
-Pre-configured middleware directory for authentication, validation, and custom middleware.
-
-### Database Ready
-
-Prepared folder structure for integrating your preferred database (MongoDB, PostgreSQL, MySQL, etc.).
-
-## 🚀 How It Works
-
- Exon is more than just a template; it's a smart generator that builds a custom project based on your preferences.
-
-1.  **Initialize**: Run `npx exon create my-app`.
-2.  **Select Language**: Choose between **TypeScript** (for type safety) or **JavaScript**.
-3.  **Select Database**: Pick your ORM/ODM:
-    -   **Prisma** (Great for SQL databses like PostgreSQL, MySQL)
-    -   **Drizzle** (Lightweight, type-safe SQL)
-    -   **Mongoose** (Perfect for MongoDB)
-    -   **None** (If you want to configure it yourself)
-4.  **Auto-Install**: Exon automatically creates the structure, configures the database client, and installs dependencies.
-5.  **Start Coding**: You get a running server with Swagger docs immediately!
-
-## Usage Examples
-
-### Create TypeScript Project
-
-```bash
-exon create my-ts-backend
-# Choose "TypeScript" when prompted
-cd my-ts-backend
-npm start
+```
+2026-03-09 11:40:10 [info] GET /api/users 200 12ms
+2026-03-09 11:40:12 [warn] Invalid login attempt
+2026-03-09 11:40:15 [error] Database connection failed
 ```
 
-### Create JavaScript Project
+### Logs Folder
 
-```bash
-exon create my-js-backend
-# Choose "JavaScript" when prompted
-cd my-js-backend
-npm start
+```
+logs
+├── app-2026-03-09.log
+├── app-2026-03-10.log
+├── error-2026-03-09.log
 ```
 
-## 💡 Why Choose Exon?
+---
 
-| Feature              | Exon                | Manual Setup         |
-| -------------------- | ------------------- | -------------------- |
-| Setup Time           | **30 seconds**      | 30+ minutes          |
-| Best Practices       | ✅ Built-in         | Manual research      |
-| Error Handling       | ✅ Included         | Need to build        |
-| TypeScript Config    | ✅ Pre-optimized    | Manual tsconfig      |
-| Middleware Templates | ✅ Ready to use     | Start from scratch   |
-| Database Support     | ✅ Multiple options | Choose and configure |
-| API Documentation    | ✅ Swagger included | Manual setup         |
+# 📚 Swagger API Documentation
 
-## 🌍 Works With
+Every project includes **automatic Swagger documentation**.
 
-- **Databases**: MongoDB, PostgreSQL, MySQL, SQLite
-- **ORMs**: Prisma, Drizzle, Mongoose, TypeORM
-- **Cloud**: AWS, Azure, Google Cloud, Vercel, Heroku
-- **Authentication**: JWT, OAuth, Firebase
-- **APIs**: REST, GraphQL, WebSockets
-- **Container**: Docker, Docker Compose
-- **CI/CD**: GitHub Actions, GitLab CI, Jenkins
+Open:
 
-## 📊 Performance
-
-- **Lightweight**: Minimal dependencies for fast startup
-- **Scalable**: Built for production deployments
-- **Efficient**: Optimized middleware chains
-- **Memory Conscious**: Lean footprint suitable for serverless deployments
-
-## Available Scripts
-
-Once your project is created, you can run:
-
-```bash
-npm start      # Start the development server
-npm run build  # Build the project (TypeScript only)
+```
+http://localhost:3802/docs
 ```
 
-## API Documentation
+Example route documentation:
 
-### Swagger/OpenAPI Docs
-
-Your Exon project includes automatic API documentation powered by Swagger UI.
-
-**Access the docs:** Navigate to `http://localhost:3802/docs` (or your configured port) in your browser.
-
-**Documenting your routes:**
-
-Add JSDoc comments to your route handlers with OpenAPI-compatible annotations:
-
-```typescript
+```ts
 /**
  * @swagger
  * /api/v1/users:
  *   get:
  *     summary: Get all users
- *     description: Retrieve a list of all users
  *     responses:
  *       200:
  *         description: Success
- *         content:
- *           application/json:
- *             schema:
- *               type: object
  */
-router.get("/users", (req, res) => {
-  // Your route logic
-});
 ```
 
-The Swagger configuration automatically scans all route files in `src/routes/*` and generates interactive documentation.
+---
 
-### Dependencies
+# 🧠 Included Utilities
 
-- **express** - Web framework
-- **cors** - Cross-origin resource sharing
-- **cookie-parser** - Parse cookies
-- **jsonwebtoken** - JWT authentication
-- **express-rate-shield** - Rate limiting
+### asyncHandler
 
-### Dev Dependencies
+Automatically catch async errors.
 
-- **typescript** - Type checking (TypeScript projects)
-- **tsx** - TypeScript execution (TypeScript projects)
-- **@types/express** - TypeScript definitions
+```ts
+router.get(
+  "/users",
+  asyncHandler(async (req, res) => {
+    // code
+  }),
+);
+```
 
-## Configuration
+---
 
-### Environment Variables
+### apiResponse
 
-Create a `.env` file in your project root:
+Standardized responses.
 
-```env
+```ts
+res.status(200).json(new apiResponse(200, data, "Success"));
+```
+
+---
+
+### apiError
+
+Consistent error handling.
+
+```ts
+throw new apiError(400, "Invalid request");
+```
+
+---
+
+# 🌍 Works With
+
+Databases:
+
+- MongoDB
+- PostgreSQL
+- MySQL
+- SQLite
+
+ORMs:
+
+- Prisma
+- Drizzle
+- Mongoose
+- TypeORM
+
+Platforms:
+
+- AWS
+- Vercel
+- Docker
+- Google Cloud
+- Heroku
+
+---
+
+# ⚔️ Comparison
+
+| Feature           | Exon          | Manual Setup |
+| ----------------- | ------------- | ------------ |
+| Setup Time        | ⚡ 30 seconds | 30+ minutes  |
+| API Docs          | ✅            | ❌           |
+| Logging           | ✅            | ❌           |
+| Error Handling    | ✅            | ❌           |
+| Project Structure | ✅            | ❌           |
+
+---
+
+# 🎯 Perfect For
+
+- REST API development
+- SaaS backends
+- microservices
+- mobile app backends
+- authentication servers
+- data APIs
+
+---
+
+# ⚙️ Environment Variables
+
+Create `.env`
+
+```
 PORT=3000
 NODE_ENV=development
 DB_URI=your_database_uri
 ```
 
-#### 🎮 Easter Egg: Leet Number
+---
 
-**Default Port: 3802** - This is Exon in leet speak!
+# 🎮 Easter Egg
 
-- E → 3
-- X → 8
-- O → 0
-- N → 2
+Default port:
 
-So **EXON = 3802** ✨
-
-### TypeScript Configuration
-
-The TypeScript template includes a pre-configured `tsconfig.json` with modern settings optimized for Node.js development.
-
-## API Utilities Reference
-
-### asyncHandler
-
-Wraps async route handlers to automatically catch errors:
-
-```typescript
-import { asyncHandler } from "./utils/asyncHandler";
-
-router.get(
-  "/users",
-  asyncHandler(async (req, res) => {
-    // Your async code here
-  })
-);
+```
+3802
 ```
 
-### apiResponse
+Leet Speak:
 
-Send consistent JSON responses:
-
-```typescript
-import { apiResponse } from "./utils/apiResponse";
-
-res.status(200).json(new apiResponse(200, data, "Success"));
+```
+E → 3
+X → 8
+O → 0
+N → 2
 ```
 
-### apiError
-
-Handle errors consistently:
-
-```typescript
-import { apiError } from "./utils/apiError";
-
-throw new apiError(400, "Invalid request");
-```
-
-## Best Practices
-
-- **Controllers** - Place business logic in controller functions
-- **Routes** - Define API endpoints in route files
-- **Middleware** - Create reusable middleware for common tasks
-- **Error Handling** - Use the provided error utilities
-- **Environment Variables** - Store sensitive data in `.env`
-- **Database** - Organize database models in the models folder
-- **Rate Limiting** - Default rate limiter is configured (15 min window, 5 requests)
-- **Security** - CORS and cookie parsing enabled for secure communication
-
-## Troubleshooting
-
-### Dependencies Installation Failed
-
-If npm install fails during project creation, run it manually:
-
-```bash
-cd your-project
-npm install
-```
-
-### Port Already in Use
-
-Change the PORT in your `.env` file or modify the port number in `src/index.ts`
-
-### TypeScript Compilation Errors
-
-Ensure you have TypeScript installed: `npm install -D typescript`
-
-### Rate Limiter Not Working
-
-Make sure `express-rate-shield` is installed: `npm install express-rate-shield`
-
-## Compatibility
-
-- **Node.js**: 18.0.0 or higher
-- **npm**: 9.0.0 or higher
-- **Operating Systems**: Windows, macOS, Linux
-
-## Contributing
-
-Contributions are welcome! Here are the ways you can contribute:
-
-- Report bugs and issues
-- Suggest new features
-- Submit pull requests
-- Improve documentation
-- Share feedback and ideas
-
-## Changelog
-
-### v1.1.0
-
-- Initial release
-- Support for TypeScript and JavaScript projects
-- Auto-installation of dependencies
-- Full project structure generation
-- Built-in rate limiting
-- JWT authentication support
-- Cookie parser middleware
-
-## License
-
-MIT License - feel free to use this in your projects.
-
-## Support
-
-For issues, feature requests, or questions:
-
-- Create an issue on [GitHub](https://github.com/arpitbhatia23/exon/issues)
-- Check existing documentation
-- Review project examples
-
-## 🎯 Popular Use Cases
-
-- 🏢 **Enterprise APIs** - Build scalable REST APIs quickly
-- 🤖 **Microservices** - Create microservices with consistent structure
-- 📱 **Mobile Backends** - Perfect for mobile app backend support
-- 🌐 **Web Applications** - Backend for web applications and SPAs
-- 🔌 **Integrations** - Third-party API integrations
-- 🔒 **Authentication Servers** - JWT-based authentication systems
-- 📊 **Data APIs** - Build data aggregation and analytics APIs
-
-## ⭐ Why Developers Love Exon
-
-- ⚡ **Time-Saving** - 30 seconds vs 30+ minutes of manual setup
-- 🎯 **Best Practices Built-In** - No need to research patterns
-- 📦 **Complete Stack** - Everything you need, nothing you don't
-- 🔄 **Flexibility** - Choose TypeScript or JavaScript
-- 🚀 **Production-Ready** - Deploy with confidence
-- 🛡️ **Type-Safe** - Optional TypeScript for error prevention
-- 📚 **Well-Documented** - Every feature explained clearly
-
-## 🤝 Contributing
-
-Contributions are welcome! Here are the ways you can contribute:
-
-- Report bugs and issues
-- Suggest new features
-- Submit pull requests
-- Improve documentation
-- Share feedback and ideas
-
-## 📄 License
-
-MIT License - feel free to use this in your projects.
-
-## Keywords
-
-`express` `cli` `boilerplate` `backend` `typescript` `javascript` `nodejs` `rest-api` `generator` `scaffold` `template` `starter` `3802` `leet-speak` `api` `server` `framework`
-
-## Testimonials
-
-> _"Exon saved me hours of boilerplate setup. Now I can focus on building features!" - Happy Developer_
-
-> _"The best Express scaffolder I've used. Highly recommended!" - DevOps Engineer_
-
-> _"Finally, a CLI that gets it right. Production-ready from day one." - CTO_
-
-## Roadmap
-
-- 🔄 GraphQL template support
-- 🗄️ Database migration utilities
-- 🔐 Enhanced security templates
-- 🧪 Built-in testing setup
-- 📊 Monitoring & analytics integration
-- 🌐 WebSocket support templates
-
-## Changelog
-
-### v1.1.0
-
-- Initial release
-- Support for TypeScript and JavaScript projects
-- Auto-installation of dependencies
-- Full project structure generation
-- Built-in rate limiting
-- JWT authentication support
-- Cookie parser middleware
-- Swagger/OpenAPI documentation
-
-## About
-
-Exon makes it simple and fast to scaffold professional Express.js applications without repetitive setup. Get to building your features faster with sensible defaults and best practices baked in.
+**EXON = 3802**
 
 ---
 
-**⭐ If Exon helped you, please star the repository on GitHub!**
+# 📊 Performance
 
-**Created with ❤️ to simplify Express development** | [GitHub](https://github.com/arpitbhatia23/exon) | [Issues](https://github.com/arpitbhatia23/exon/issues) | [Discussions](https://github.com/arpitbhatia23/exon/discussions)
+- Lightweight dependencies
+- Fast startup
+- Scalable architecture
+- Production optimized
+
+---
+
+# 🤝 Contributing
+
+Contributions welcome.
+
+Ways to contribute:
+
+- Report issues
+- Suggest features
+- Submit pull requests
+- Improve docs
+
+---
+
+# ⭐ Star History
+
+If you like this project please **star the repository**.
+
+---
+
+# 🔍 SEO Keywords
+
+express boilerplate
+express cli
+nodejs backend starter
+typescript express template
+node api generator
+rest api scaffold
+express backend template
+
+---
+
+# 📄 License
+
+MIT License.
+
+---
+
+# ❤️ Support
+
+GitHub: https://github.com/arpitbhatia23/exon
+
+---
+
+⭐ **If Exon helped you, consider starring the repo!**
