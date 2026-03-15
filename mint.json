@@ -1,5 +1,19 @@
 {
+  "name": "Exon",
   "docs_dir": "Exon/docs",
+  "favicon": "/favicon.ico",
+  "colors": {
+    "primary": "#5c6ac4",
+    "background": "#ffffff",
+    "text": "#111827"
+  },
+  "navigation": [
+    { "label": "Getting Started", "path": "/getting-started" },
+    { "label": "CLI Usage", "path": "/cli" },
+    { "label": "API", "path": "/api" },
+    { "label": "Templates", "path": "/templates" },
+    { "label": "Contributing", "path": "/contributing" }
+  ],
   "site": {
     "title": "Exon",
     "description": "Generate production-ready Express.js APIs in seconds"
