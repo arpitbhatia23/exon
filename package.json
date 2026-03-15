@@ -4,7 +4,7 @@
   "description": "Production-ready Express.js backend generator. Scaffolds TypeScript/JavaScript projects with patterns for Prisma, Drizzle, Mongoose, and more.",
   "main": "./dist/index.js",
   "bin": {
-    "exon": "./dist/index.js"
+    "exon-cli": "./dist/index.js"
   },
   "scripts": {
     "build": "npx tsc",

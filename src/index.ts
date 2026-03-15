@@ -11,7 +11,7 @@ import { appendEnv, mergeDbConfigToRoot, mergeDeps } from "./dbHelper.js";
 const program = new Command();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
+import pkg from "../package.json" with { type: "json" };
 import {
   select,
   cancel,
@@ -21,12 +21,22 @@ import {
   spinner,
 } from "@clack/prompts";
 program
-  .name("exon")
-  .description("CLI to generate Express backend boilerplate")
-  .version("1.1.6");
+  .name("exon-cli")
+  .description("⚡ Generate production-ready Express.js APIs in seconds")
+  .version(pkg.version, "-v, --version", "output the current version")
+  .addHelpText(
+    "after",
+    `
+Examples:
+  $ exon-cli create my-api
+  $ exon-cli create blog-backend
 
+Docs:
+  https://www.npmjs.com/package/exon-cli
+`,
+  );
 console.log(
-  chalk.yellow(figlet.textSync("EXON", { horizontalLayout: "full" })),
+  chalk.yellow(figlet.textSync("EXON-CLI", { horizontalLayout: "full" })),
 );
 
 program

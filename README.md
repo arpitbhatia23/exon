@@ -46,7 +46,6 @@ Exon **automatically configures everything**.
 - 📚 **Swagger/OpenAPI Documentation**
 - 🧠 **Production Logging System**
 - 🛡️ **Error Handling Utilities**
-- 🔐 **JWT Authentication Ready**
 - 🗄️ **Database Ready**
 - 📦 **Clean Project Structure**
 - 🚀 **Production Best Practices**
