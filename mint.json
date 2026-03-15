@@ -3,16 +3,25 @@
   "docs_dir": "Exon/docs",
   "favicon": "/favicon.ico",
   "colors": {
-    "primary": "#5c6ac4",
-    "background": "#ffffff",
-    "text": "#111827"
+    "primary": { "default": "#5c6ac4" },
+    "background": { "default": "#ffffff" }
   },
   "navigation": [
-    { "label": "Getting Started", "path": "/getting-started" },
-    { "label": "CLI Usage", "path": "/cli" },
-    { "label": "API", "path": "/api" },
-    { "label": "Templates", "path": "/templates" },
-    { "label": "Contributing", "path": "/contributing" }
+    {
+      "group": "Guide",
+      "pages": [
+        { "label": "Getting Started", "path": "/getting-started" },
+        { "label": "CLI Usage", "path": "/cli" }
+      ]
+    },
+    {
+      "group": "Reference",
+      "pages": [
+        { "label": "API", "path": "/api" },
+        { "label": "Templates", "path": "/templates" },
+        { "label": "Contributing", "path": "/contributing" }
+      ]
+    }
   ],
   "site": {
     "title": "Exon",
