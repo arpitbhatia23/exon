@@ -19,8 +19,8 @@ program
     .version(pkg.version, "-v, --version", "output the current version")
     .addHelpText("after", `
 Examples:
-  $ exon create my-api
-  $ exon create blog-backend
+  $ exon-cli create my-api
+  $ exon-cli create blog-backend
 
 Docs:
   https://www.npmjs.com/package/exon-cli

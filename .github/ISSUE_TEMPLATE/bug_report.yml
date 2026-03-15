@@ -1,0 +1,34 @@
+name: Bug report
+description: Report a problem with exon-cli
+title: "[BUG] "
+labels: ["bug"]
+
+body:
+  - type: textarea
+    attributes:
+      label: Description
+      description: Describe the bug clearly
+      placeholder: What happened?
+
+  - type: textarea
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Run exon-cli create my-api
+        2. Select TypeScript
+        3. Error appears
+
+  - type: input
+    attributes:
+      label: CLI Version
+      placeholder: e.g. 2.0.1
+
+  - type: input
+    attributes:
+      label: Node Version
+      placeholder: e.g. 20.x
+
+  - type: textarea
+    attributes:
+      label: Expected behavior
+      placeholder: What should happen instead?
