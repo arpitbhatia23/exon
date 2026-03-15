@@ -6,14 +6,20 @@
   "colors": {
     "primary": "#5c6ac4"
   },
-  "navigation": [
-    {
-      "group": "Guide",
-      "pages": ["getting-started", "cli"]
-    },
-    {
-      "group": "Reference",
-      "pages": ["api", "templates", "contributing"]
-    }
-  ]
+  "site": {
+    "title": "Exon",
+    "description": "Generate production-ready Express.js APIs in seconds"
+  },
+  "navigation": {
+    "groups": [
+      {
+        "group": "Guide",
+        "pages": ["getting-started", "cli"]
+      },
+      {
+        "group": "Reference",
+        "pages": ["api", "templates", "contributing"]
+      }
+    ]
+  }
 }
