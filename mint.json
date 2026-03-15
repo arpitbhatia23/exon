@@ -1,29 +1,19 @@
 {
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
   "name": "Exon",
-  "docs_dir": "Exon/docs",
   "favicon": "/favicon.ico",
   "colors": {
-    "primary": {
-      "default": "#5c6ac4",
-      "text": "#ffffff"
-    },
-    "background": {
-      "default": "#ffffff",
-      "text": "#000000"
-    }
+    "primary": "#5c6ac4"
   },
   "navigation": [
     {
       "group": "Guide",
-      "pages": ["/getting-started", "/cli"]
+      "pages": ["getting-started", "cli"]
     },
     {
       "group": "Reference",
-      "pages": ["/api", "/templates", "/contributing"]
+      "pages": ["api", "templates", "contributing"]
     }
-  ],
-  "site": {
-    "title": "Exon",
-    "description": "Generate production-ready Express.js APIs in seconds"
-  }
+  ]
 }
