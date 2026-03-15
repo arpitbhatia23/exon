@@ -3,8 +3,14 @@
   "docs_dir": "Exon/docs",
   "favicon": "/favicon.ico",
   "colors": {
-    "primary": "#5c6ac4",
-    "background": "#ffffff"
+    "primary": {
+      "default": "#5c6ac4",
+      "text": "#ffffff"
+    },
+    "background": {
+      "default": "#ffffff",
+      "text": "#000000"
+    }
   },
   "navigation": [
     {
