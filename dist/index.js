@@ -11,6 +11,7 @@ import { appendEnv, mergeDbConfigToRoot, mergeDeps } from "./dbHelper.js";
 const program = new Command();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+import color from "picocolors";
 import pkg from "../package.json" with { type: "json" };
 import { select, cancel, isCancel, intro, outro, spinner, } from "@clack/prompts";
 program
@@ -24,6 +25,10 @@ Examples:
 
 Docs:
   https://www.npmjs.com/package/exon-cli
+
+  🚀 exon-cli just saved you 30 minutes of setup!
+
+ Star the repo to support the project: https://github.com/arpitbhatia23/exon
 `);
 console.log(chalk.yellow(figlet.textSync("EXON-CLI", { horizontalLayout: "full" })));
 program
@@ -124,7 +129,10 @@ program
                 process.exit(1);
             }
         }
-        outro(chalk.green("Done! Run 'npm start' inside your project folder."));
+        outro(color.green(`🚀 exon-cli just saved you 30 minutes of setup!`) +
+            "\n" +
+            color.dim(`Star the repo to support the project: `) +
+            color.cyan(color.underline("https://github.com/arpitbhatia23/exon")));
     }
     catch (error) {
         if (error) {
