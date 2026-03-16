@@ -9,7 +9,7 @@
   "navigation": [
     {
       "group": "Guide",
-      "pages": ["getting-started", "cli"]
+      "pages": ["index", "getting-started", "cli"]
     },
     {
       "group": "Reference",
