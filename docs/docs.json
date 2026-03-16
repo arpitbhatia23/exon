@@ -2,10 +2,10 @@
   "title": "Exon",
   "description": "Generate production-ready Express.js APIs in seconds",
   "sidebar": [
-    { "label": "Getting Started", "path": "getting-started" },
-    { "label": "CLI Usage", "path": "cli" },
-    { "label": "API", "path": "api" },
-    { "label": "Templates", "path": "templates" },
-    { "label": "Contributing", "path": "contributing" }
+    { "label": "Getting Started", "path": "getting-started.md" },
+    { "label": "CLI Usage", "path": "cli.md" },
+    { "label": "API", "path": "api.md" },
+    { "label": "Templates", "path": "templates.md" },
+    { "label": "Contributing", "path": "contributing.md" }
   ]
 }

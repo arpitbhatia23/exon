@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/mint.json",
   "theme": "venus",
-  "name": "Exon",
+  "name": "EXON-CLI",
   "favicon": "favicon.ico",
   "colors": {
     "primary": "#5c6ac4"
