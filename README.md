@@ -1,91 +1,101 @@
-# ⚡ Exon — Express Backend Boilerplate Generator
+# ⚡ Exon — The "Create React App" for Express APIs
 
-> **The fastest way to create production-ready Express.js APIs.**
-> Think **Create React App — but for backend APIs.**
+🔥 Bootstrap production-ready Express.js backends in **30 seconds**
 
-Exon is a powerful **CLI tool** that generates a **production-ready Express.js backend** with best practices, logging, Swagger docs, and database support in seconds.
+<p align="center">
+  <img src="./demo.png" alt="Exon CLI Demo" width="800"/>
+</p>
 
-Instead of spending **30+ minutes setting up an Express backend**, Exon gives you a **fully structured project instantly**.
+---
 
-```
+## ⚡ Try It Now
+
+```bash
 npx exon-cli create my-api
-cd my-api
-npm start
+cd my-api && npm start
 ```
 
-## Demo
-
-[![asciicast](https://asciinema.org/a/kbs72JTWSFpOkuNn.svg)](https://asciinema.org/a/kbs72JTWSFpOkuNn)
-
-🚀 Your backend is ready.
+🚀 Your backend is live with Swagger docs.
 
 ---
 
-# ⭐ Why Developers Love Exon
+## 😩 The Problem
 
-Setting up a backend usually means installing and configuring:
+Setting up an Express backend every time is repetitive and slow:
 
-- Express
-- TypeScript
-- Logger
-- Error handling
-- Swagger documentation
-- Database ORM
-- Middleware structure
+- Install Express
+- Setup TypeScript
+- Configure logging
+- Setup error handling
+- Add Swagger docs
+- Create folder structure
 
-Exon **automatically configures everything**.
-
-⚡ Setup time: **30 seconds**
+⏱️ Takes **30–60 minutes** every time.
 
 ---
 
-# ✨ Features
+## ⚡ The Solution
 
-- ⚡ **Instant Backend Setup**
-- 🔄 **TypeScript & JavaScript Support**
-- 📚 **Swagger/OpenAPI Documentation**
-- 🧠 **Production Logging System**
-- 🛡️ **Error Handling Utilities**
-- 🗄️ **Database Ready**
-- 📦 **Clean Project Structure**
-- 🚀 **Production Best Practices**
+**Exon does everything instantly.**
+
+👉 Production-ready backend in **under 30 seconds**
 
 ---
 
-# 📦 Installation
+## ⭐ Why Developers Love Exon
 
-Install globally:
+- ⚡ Zero setup time
+- 📚 Built-in Swagger API docs
+- 🧠 Clean architecture
+- 🛡️ Production-ready error handling
+- 📦 Scalable folder structure
+- 🔥 Works out of the box
 
-```
-npm install -g exon-cli
-```
+---
 
-Or run directly with **npx**:
+## ✨ Features
 
-```
+- ⚡ Instant Express backend setup
+- 🔄 TypeScript & JavaScript support
+- 📚 Swagger/OpenAPI documentation
+- 🧠 Production logging system
+- 🛡️ Error handling utilities
+- 🗄️ Database ready
+- 📦 Clean project structure
+- 🚀 Production best practices
+
+---
+
+## 📦 Installation
+
+### Option 1: Use with npx (recommended)
+
+```bash
 npx exon-cli create my-app
 ```
 
+### Option 2: Install globally
+
+```bash
+npm install -g exon-cli
+```
+
 ---
 
-# 🚀 Quick Start
+## 🚀 Quick Start
 
 ### 1️⃣ Create Project
 
-```
+```bash
 exon-cli create my-express-app
 ```
 
 ### 2️⃣ Choose Language
 
-Select:
-
 - TypeScript
 - JavaScript
 
 ### 3️⃣ Choose Database
-
-Options:
 
 - Prisma
 - Drizzle
@@ -94,24 +104,14 @@ Options:
 
 ### 4️⃣ Start Server
 
-```
+```bash
 cd my-express-app
 npm start
 ```
 
-Server runs instantly with **Swagger docs enabled**.
-
 ---
 
-# 🎬 Example Workflow
-
-```
-npx exon-cli create my-api
-cd my-api
-npm start
-```
-
-Output:
+## 🎬 Example Output
 
 ```
 Server running on http://localhost:3802
@@ -120,7 +120,7 @@ Swagger Docs: http://localhost:3802/docs
 
 ---
 
-# 📁 Generated Project Structure
+## 📁 Project Structure
 
 ```
 my-express-app
@@ -146,15 +146,15 @@ my-express-app
 
 ---
 
-# 🔎 Production Logging (Built-In)
+## 🔎 Production Logging (Built-In)
 
-Every Exon project includes **production-ready logging** powered by:
+Every project includes:
 
-- Morgan → HTTP request logging
-- Winston → application logging
-- Daily log rotation
+- **Morgan** → HTTP request logging
+- **Winston** → Application logging
+- **Daily log rotation**
 
-### Log Output Example
+### Example Logs
 
 ```
 2026-03-09 11:40:10 [info] GET /api/users 200 12ms
@@ -162,30 +162,19 @@ Every Exon project includes **production-ready logging** powered by:
 2026-03-09 11:40:15 [error] Database connection failed
 ```
 
-### Logs Folder
-
-```
-logs
-├── app-2026-03-09.log
-├── app-2026-03-10.log
-├── error-2026-03-09.log
-```
-
 ---
 
-# 📚 Swagger API Documentation
+## 📚 Swagger API Documentation
 
-Every project includes **automatic Swagger documentation**.
-
-Open:
+Access docs instantly:
 
 ```
 http://localhost:3802/docs
 ```
 
-Example route documentation:
+### Example Route
 
-```ts
+```js
 /**
  * @swagger
  * /api/v1/users:
@@ -199,17 +188,17 @@ Example route documentation:
 
 ---
 
-# 🧠 Included Utilities
+## 🧠 Included Utilities
 
 ### asyncHandler
 
-Automatically catch async errors.
+Automatically handles async errors:
 
-```ts
+```js
 router.get(
   "/users",
   asyncHandler(async (req, res) => {
-    // code
+    // your code
   }),
 );
 ```
@@ -218,9 +207,9 @@ router.get(
 
 ### apiResponse
 
-Standardized responses.
+Standardized API responses:
 
-```ts
+```js
 res.status(200).json(new apiResponse(200, data, "Success"));
 ```
 
@@ -228,31 +217,29 @@ res.status(200).json(new apiResponse(200, data, "Success"));
 
 ### apiError
 
-Consistent error handling.
+Consistent error handling:
 
-```ts
+```js
 throw new apiError(400, "Invalid request");
 ```
 
 ---
 
-# 🌍 Works With
+## 🌍 Works With
 
-Databases:
+### Databases
 
 - MongoDB
 - PostgreSQL
 - MySQL
 - SQLite
 
-ORMs:
+### ORMs
 
-- Prisma
 - Drizzle
 - Mongoose
-- TypeORM
 
-Platforms:
+### Platforms
 
 - AWS
 - Vercel
@@ -262,32 +249,34 @@ Platforms:
 
 ---
 
-# ⚔️ Comparison
+## ⚔️ Exon vs Manual Setup
 
-| Feature           | Exon          | Manual Setup |
-| ----------------- | ------------- | ------------ |
-| Setup Time        | ⚡ 30 seconds | 30+ minutes  |
-| API Docs          | ✅            | ❌           |
-| Logging           | ✅            | ❌           |
-| Error Handling    | ✅            | ❌           |
-| Project Structure | ✅            | ❌           |
+| Task              | Exon ⚡ | Manual 😵 |
+| ----------------- | ------- | --------- |
+| Setup Time        | 30 sec  | 30–60 min |
+| Swagger Docs      | ✅      | ❌        |
+| Logging           | ✅      | ❌        |
+| Error Handling    | ✅      | ❌        |
+| Project Structure | ✅      | ❌        |
+
+👉 Stop wasting time on setup.
 
 ---
 
-# 🎯 Perfect For
+## 🎯 Use Cases
 
 - REST API development
 - SaaS backends
-- microservices
-- mobile app backends
-- authentication servers
-- data APIs
+- Microservices
+- Mobile app backends
+- Authentication servers
+- Rapid prototyping
 
 ---
 
-# ⚙️ Environment Variables
+## ⚙️ Environment Variables
 
-Create `.env`
+Create a `.env` file:
 
 ```
 PORT=3000
@@ -297,7 +286,7 @@ DB_URI=your_database_uri
 
 ---
 
-# 🎮 Easter Egg
+## 🎮 Easter Egg
 
 Default port:
 
@@ -314,11 +303,11 @@ O → 0
 N → 2
 ```
 
-**EXON = 3802**
+👉 EXON = **3802**
 
 ---
 
-# 📊 Performance
+## 📊 Performance
 
 - Lightweight dependencies
 - Fast startup
@@ -327,47 +316,51 @@ N → 2
 
 ---
 
-# 🤝 Contributing
+## ⭐ Loved by Developers
 
-Contributions welcome.
+> 🚀 "Saved me hours of setup"
+> 🔥 "Best Express CLI I've used"
+> ⚡ "Super clean structure"
 
-Ways to contribute:
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
 
 - Report issues
 - Suggest features
 - Submit pull requests
-- Improve docs
+- Improve documentation
 
 ---
 
-# ⭐ Star History
+## 📄 License
 
-If you like this project please **star the repository**.
+MIT License
 
 ---
 
-# 🔍 SEO Keywords
+## ❤️ Support
 
-express boilerplate
+👉 GitHub: [https://github.com/arpitbhatia23/exon](https://github.com/arpitbhatia23/exon)
+
+⭐ **If Exon helped you, please star the repo!**
+
+---
+
+## 🔍 SEO Keywords
+
 express cli
+express generator
 nodejs backend starter
-typescript express template
-node api generator
-rest api scaffold
-express backend template
+typescript express boilerplate
+express api template
+nodejs rest api generator
+backend scaffold tool
+express production setup
+express starter template
 
 ---
 
-# 📄 License
-
-MIT License.
-
----
-
-# ❤️ Support
-
-GitHub: https://github.com/arpitbhatia23/exon
-
----
-
-⭐ **If Exon helped you, consider starring the repo!**
+🔥 Built to make backend development fast again.
