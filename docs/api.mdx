@@ -1,37 +1,67 @@
 ---
 title: Core API Reference
+description: Dive into the internal helper functions and core logic of Exon CLI
+icon: code
 ---
 
-# Core API Reference
+This page documents the key functions used by the Exon CLI in `src`.
 
-This page documents the key functions used by the CLI located in `src`.
+## Database Templates
 
-**`resolveDbTemplate(a)`**: Determines which DB template path to use.
+### `resolveDbTemplate`
 
-- **Params**: `a` — object with `language` (`TypeScript` | `JavaScript`) and `database` (`Mongoose` | `Prisma` | `Drizzle` | `None`).
-- **Returns**: a relative template path string like `mongoose/ts` or `prisma/js`, or `null` when `None`.
+<ParamField path="a" type="Object">
+  An object containing `language` (TypeScript | JavaScript) and `database` (Mongoose | Prisma | Drizzle | None).
+</ParamField>
 
-Reference: [src/resolveDbTemplates.ts](src/resolveDbTemplates.ts#L1-L999)
+<ResponseField name="return value" type="string | null">
+  Returns a relative template path string like `mongoose/ts` or `prisma/js`. Returns `null` when `None`.
+</ResponseField>
 
-**`mergeDeps(targetDir, depsPath)`**: Merges `deps.json` into the new project's `package.json`.
+Determines which local database template path to use. Reference: [src/resolveDbTemplates.ts](https://github.com/arpitbhatia23/exon/blob/main/src/resolveDbTemplates.ts)
 
-- **Params**:
-  - `targetDir` — path to the generated project root
-  - `depsPath` — path to a `deps.json` file inside template folder
+## Configuration Merging
 
-It reads `package.json` at `targetDir`, merges dependencies/devDependencies/scripts from `depsPath`, and writes back.
+### `mergeDeps`
 
-**`appendEnv(targetDir, envPath)`**: Appends contents of `env.append` to the project's `.env` if present.
+<ParamField path="targetDir" type="string">
+  Path to the generated project root.
+</ParamField>
+<ParamField path="depsPath" type="string">
+  Path to a `deps.json` file inside the template folder.
+</ParamField>
 
-**`mergeDbConfigToRoot(targetDir, templateDir)`**: Copies database config files from `templateDir` into `targetDir`, filtering out certain files such as `env.append`, `deps.json`, template entrypoints, and Prisma schema (if present).
+Merges `deps.json` into the new project's `package.json`. It reads `package.json` at `targetDir`, merges dependencies, devDependencies, and scripts from `depsPath`, and writes back.
 
-Reference: [src/dbHelper.ts](src/dbHelper.ts#L1-L999)
+### `appendEnv`
 
-**`index` (CLI entry)**: `src/index.ts` implements the CLI flow using `commander` and `@clack/prompts`. Major steps:
+<ParamField path="targetDir" type="string">
+  Path to the generated project root.
+</ParamField>
+<ParamField path="envPath" type="string">
+  Path to the environment variables block.
+</ParamField>
 
-- Build template path from language
-- Copy template to target folder
-- Resolve and copy DB template (if chosen)
-- Merge deps, append env, merge DB config, run `npm install`
+Appends contents of `env.append` to the project's `.env` if present.
 
-Reference: [src/index.ts](src/index.ts#L1-L999)
+### `mergeDbConfigToRoot`
+
+<ParamField path="targetDir" type="string" required>
+  Path to the generated project root.
+</ParamField>
+<ParamField path="templateDir" type="string" required>
+  Path to the selected DB template folder.
+</ParamField>
+
+Copies database config files from `templateDir` into `targetDir`, filtering out CLI internal files such as `env.append`, `deps.json`, template entrypoints, and Prisma schema (if present). Reference: [src/dbHelper.ts](https://github.com/arpitbhatia23/exon/blob/main/src/dbHelper.ts)
+
+## Main CLI Flow
+
+### `index` (CLI entry)
+
+`src/index.ts` orchestrates the entire flow using `commander` and `@clack/prompts`:
+
+1. Build template path from language
+2. Copy template to target folder
+3. Resolve and copy DB template (if selected)
+4. Merge deps, append env, merge DB config, and run `npm install`

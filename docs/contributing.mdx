@@ -1,16 +1,28 @@
 ---
 title: Contributing
+description: Make your first open-source contribution to Exon CLI
+icon: hands-helping
 ---
 
-# Contributing
+Thanks for considering contributing to Exon! We always welcome community PRs. Follow these basic guidelines to get started.
 
-Thanks for considering contributing to Exon. Guidelines:
+## Workflow
 
-- Clone the repo and open a branch for your work.
-- Run and test CLI changes locally using `node ./dist/bin/exon.js` after building, or run TS in dev flows.
-- Keep changes focused and open a PR with a clear description.
+<Steps>
+  <Step title="Clone & Branch">
+    Fork and clone the repository, then create a new branch for your specific feature or fix.
+  </Step>
+  <Step title="Run CLI Locally">
+    Always run and test CLI changes locally before submitting. Use `node ./dist/bin/exon.js` after building, or run your typical TypeScript dev flow.
+  </Step>
+  <Step title="Create Pull Request">
+    Keep your changes focused. Open a Pull Request from your branch against the main repository and write a clear, descriptive PR title and body.
+  </Step>
+</Steps>
 
-If adding templates, ensure:
+## Adding Template Updates
 
-- Template folders are complete and include `deps.json` and `env.append` when necessary.
-- Any runtime scripts referenced in `package.json` work across platforms (Windows/macOS/Linux).
+If adding templates or touching the scaffold generation, ensure:
+- Template folders are complete and tested internally.
+- Include `deps.json` and `env.append` if external dependencies/environment variables are required.
+- Any runtime scripts referenced in `package.json` are cross-platform friendly (Windows, macOS, Linux).

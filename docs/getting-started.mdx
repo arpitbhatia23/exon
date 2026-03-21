@@ -1,37 +1,50 @@
 ---
 title: Getting Started
+description: Set up Exon CLI and generate your first backend
+icon: rocket
 ---
 
-# Getting Started
+## Installation
 
-## Install
+You can use Exon CLI via `npx` or install it globally.
 
-Install `exon-cli` globally (recommended) or use npx:
-
-```bash
-npm i -g exon-cli
-# or
+<CodeGroup>
+```bash npx (Recommended)
 npx exon-cli create my-api
 ```
 
-## Create a new project
-
-Run the `create` command and follow prompts to pick language and database:
-
-```bash
+```bash Global install
+npm i -g exon-cli
 exon-cli create my-api
 ```
+</CodeGroup>
 
-The CLI will:
+## Create a New Project
 
-- copy a JavaScript or TypeScript Express template into `my-api`
-- optionally copy database scaffolding into `my-api/src/db`
-- merge dependencies and environment entries
-- run `npm install` in the created project
+<Steps>
+  <Step title="Run the setup command">
+    Run the `create` command in your terminal. This will start the interactive setup.
 
-After completion, change into the directory and start the app:
+    ```bash
+    exon-cli create my-api
+    ```
+  </Step>
+  <Step title="Select project options">
+    The CLI will prompt you to pick your preferred language (TypeScript or JavaScript) and database ORM (Prisma, Drizzle, Mongoose, or None).
+    
+    Exon will then:
+    - Copy the selected Express template
+    - Scaffold the database connection and models
+    - Merge any necessary dependencies
+  </Step>
+  <Step title="Start your server">
+    After the CLI completes the setup and runs `npm install`, change into the directory and start your backend:
 
-```bash
-cd my-api
-npm start
-```
+    ```bash
+    cd my-api
+    npm start
+    ```
+    
+    Your server will be running on `http://localhost:3802` by default.
+  </Step>
+</Steps>

@@ -1,11 +1,29 @@
 {
-  "title": "Exon",
-  "description": "Generate production-ready Express.js APIs in seconds",
-  "sidebar": [
-    { "label": "Getting Started", "path": "getting-started" },
-    { "label": "CLI Usage", "path": "cli" },
-    { "label": "API", "path": "api" },
-    { "label": "Templates", "path": "templates" },
-    { "label": "Contributing", "path": "contributing" }
+  "name": "Exon",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "colors": {
+    "primary": "#5c6ac4",
+    "light": "#8994d4",
+    "dark": "#3645a8"
+  },
+  "navigation": [
+    {
+      "group": "Guide",
+      "pages": [
+        "getting-started",
+        "cli"
+      ]
+    },
+    {
+      "group": "Reference",
+      "pages": [
+        "api",
+        "templates",
+        "contributing"
+      ]
+    }
   ]
 }

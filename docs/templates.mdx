@@ -1,27 +1,35 @@
 ---
 title: Templates & Structure
+description: Understand Exon's built-in framework templates and folder structure
+icon: layer-group
 ---
 
-# Templates & Structure
+## Available Templates
 
-Exon ships with ready-made templates under `templates/` for both JavaScript and TypeScript projects and separate DB template folders.
+Exon ships with ready-made templates under the `templates/` folder for both JavaScript and TypeScript projects, as well as separate Database (DB) templates.
 
-- Project templates:
-  - `node-express-template-js` — JavaScript Express starter
-  - `node-express-template-ts` — TypeScript Express starter
+<CardGroup cols={2}>
+  <Card title="Project Templates" icon="folder-tree">
+    - `node-express-template-js` (JavaScript)
+    - `node-express-template-ts` (TypeScript)
+  </Card>
+  <Card title="Database Templates" icon="database">
+    Copied into `src/db` (when selected):
+    - `mongoose/js` | `mongoose/ts`
+    - `prisma/js` | `prisma/ts`
+    - `drizzle/js` | `drizzle/ts`
+  </Card>
+</CardGroup>
 
-- DB templates (copied into `src/db` inside generated project when selected):
-  - `mongoose/js` and `mongoose/ts`
-  - `prisma/js` and `prisma/ts`
-  - `drizzle/js` and `drizzle/ts`
+## The Generation Flow
 
-During project creation the CLI performs:
+During project creation, the Exon CLI automates the following steps:
 
-- copy of selected project template
-- if DB selected: copy of the DB template into `src/db`
-- merge of `deps.json` into project `package.json`
-- append of `env.append` into project `.env`
+1. **Copies Project Template**: Scaffolds the base Express boilerplate.
+2. **Copies DB Template**: Places the selected DB config automatically into `src/db`.
+3. **Merges Dependencies**: Appends contents of `deps.json` into the root `package.json`.
+4. **Appends Environment Variables**: Attaches any data from `env.append` into the local `.env`.
 
-If you want to add your own template, add a folder under `templates/` and follow the structure of existing templates. Provide a `deps.json` and `env.append` if additional deps or environment variables are required.
+## Custom Templates
 
-Reference: [templates folder](templates)
+If you wish to add your own template or expand an existing one, simply add a folder under `templates/` and follow the matching structure from the standard templates. Provide a `deps.json` and `env.append` if additional dependencies and variables are needed.

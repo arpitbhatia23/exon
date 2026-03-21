@@ -1,22 +1,30 @@
 ---
 title: CLI Usage
+description: Explore the available commands and workflow
+icon: terminal
 ---
-
-# CLI Usage
 
 ## Commands
 
-- `create <name>`: Scaffold a new Express project.
+The primary command for Exon CLI is `create`.
+
+<ParamField path="create <name>" type="command">
+  Scaffolds a new Express project in a folder with the specified `<name>`.
+</ParamField>
 
 ### Examples
+
+To create a project named `blog-backend`:
 
 ```bash
 exon-cli create blog-backend
 ```
 
-The CLI is interactive. It will ask:
+## Interactive Prompts
 
-- Which language do you want to use? (TypeScript / JavaScript)
-- Which database ORM do you want to use? (Mongoose / Prisma / Drizzle / None)
+When you run the `create` command, the CLI walks you through a series of interactive prompts:
 
-Output messages and progress are shown, and the tool attempts to run `npm install` in the created folder.
+1. **Language Selection**: Choose between `TypeScript` and `JavaScript`.
+2. **Database ORM**: Choose between `Mongoose`, `Prisma`, `Drizzle`, or `None`.
+
+Based on your selections, output messages and progress are displayed in the terminal. Exon CLI will also attempt to run `npm install` for you in the newly created folder, so you can immediately begin developing.
