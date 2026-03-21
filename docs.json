@@ -13,16 +13,17 @@
     {
       "group": "Guide",
       "pages": [
-        "getting-started",
-        "cli"
+        "docs/index",
+        "docs/getting-started",
+        "docs/cli"
       ]
     },
     {
       "group": "Reference",
       "pages": [
-        "api",
-        "templates",
-        "contributing"
+        "docs/api",
+        "docs/templates",
+        "docs/contributing"
       ]
     }
   ]
