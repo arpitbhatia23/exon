@@ -10,22 +10,24 @@
     "light": "#8994d4",
     "dark": "#3645a8"
   },
-  "navigation": [
-    {
-      "group": "Guide",
-      "pages": [
-        "docs/index",
-        "docs/getting-started",
-        "docs/cli"
-      ]
-    },
-    {
-      "group": "Reference",
-      "pages": [
-        "docs/api",
-        "docs/templates",
-        "docs/contributing"
-      ]
-    }
-  ]
+  "navigation": {
+    "groups": [
+      {
+        "group": "Guide",
+        "pages": [
+          "docs/index",
+          "docs/getting-started",
+          "docs/cli"
+        ]
+      },
+      {
+        "group": "Reference",
+        "pages": [
+          "docs/api",
+          "docs/templates",
+          "docs/contributing"
+        ]
+      }
+    ]
+  }
 }
