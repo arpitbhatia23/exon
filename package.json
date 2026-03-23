@@ -59,7 +59,9 @@
     "README.md",
     "LICENSE",
     "!templates/node-express-template-ts/node_modules/**",
-    "!templates/node-express-template-js/node_modules/**"
+    "!templates/node-express-template-js/node_modules/**",
+    "!templates/node-express-template-ts/package-lock.json/**",
+    "!templates/node-express-template-js/node_modules/package-lock.json/**"
   ],
   "publishConfig": {
     "access": "public"
