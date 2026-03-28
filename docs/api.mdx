@@ -55,6 +55,33 @@ Appends contents of `env.append` to the project's `.env` if present.
 
 Copies database config files from `templateDir` into `targetDir`, filtering out CLI internal files such as `env.append`, `deps.json`, template entrypoints, and Prisma schema (if present). Reference: [src/dbHelper.ts](https://github.com/arpitbhatia23/exon/blob/main/src/dbHelper.ts)
 
+## Docker Support
+
+### `addDocker`
+
+<ParamField path="options" type="Object">
+  Command-line options including `docker`.
+</ParamField>
+<ParamField path="language" type="string">
+  Selected language (TypeScript | JavaScript).
+</ParamField>
+<ParamField path="targetDir" type="string">
+  Path to the generated project root.
+</ParamField>
+
+Handles the Docker setup logic. It checks for the `--docker` flag and, if not present, prompts the user to enable Docker support.
+
+### `createDockerFile`
+
+<ParamField path="language" type="string">
+  Selected language (TypeScript | JavaScript).
+</ParamField>
+<ParamField path="targetDir" type="string">
+  Path to the generated project root.
+</ParamField>
+
+Generates an optimized `Dockerfile` and `.dockerignore` based on the project's language in `targetDir`.
+
 ## Main CLI Flow
 
 ### `index` (CLI entry)
@@ -64,4 +91,5 @@ Copies database config files from `templateDir` into `targetDir`, filtering out 
 1. Build template path from language
 2. Copy template to target folder
 3. Resolve and copy DB template (if selected)
-4. Merge deps, append env, merge DB config, and run `npm install`
+4. **Generate Docker configuration (if enabled)**
+5. Merge deps, append env, merge DB config, and run `npm install`

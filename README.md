@@ -52,6 +52,7 @@ Exon CLI acts as the "Create React App" or "Next.js" equivalent for Express APIs
 - **🧠 Production Logging System**: Pre-configured daily log rotation using Morgan and Winston.
 - **🛡️ Bulletproof Error Handling**: Standardized `apiError`, `apiResponse`, and `asyncHandler` utilities.
 - **🗄️ Database Ready**: Instantly integrate MongoDB, PostgreSQL, MySQL via **Mongoose**, **Prisma**, or **Drizzle**.
+- **🐳 Docker Support**: Generate a optimized Dockerfile and setup for production deployment.
 - **📦 Clean Architecture**: Highly scalable folder tree separating routes, controllers, and models.
 
 ---
@@ -80,7 +81,8 @@ When you run the command, Exon CLI provides an easy semantic workflow:
 
 1. **Choose Language**: TypeScript or JavaScript.
 2. **Choose Database**: Prisma, Drizzle, Mongoose, or None.
-3. **Automatic Install**: Exon merges the required dependencies and runs `npm install` automatically.
+3. **Dockerize Project**: Optionally generate a Docker configuration.
+4. **Automatic Install**: Exon merges the required dependencies and runs `npm install` automatically.
 
 ---
 
@@ -154,6 +156,27 @@ Just write JSDoc comments above your routes, and Swagger UI dynamically renders 
  *       200:
  *         description: Success
  */
+```
+
+### 4. Production-Ready Dockerization
+
+Exon can automatically generate a `Dockerfile`, `.dockerignore`, and `docker-compose.yml` optimized for your chosen language (TS/JS). It even **automatically adds the correct database service** (PostgreSQL for Prisma/Drizzle, MongoDB for Mongoose) to your compose file, pre-configured with the necessary environment variables!
+
+```bash
+npx exon-cli create my-app --docker
+```
+
+Or simply select **Yes** during the interactive prompt. To build and run using Docker Compose:
+
+```bash
+docker compose up --build
+```
+
+You can also build manually:
+
+```bash
+docker build -t my-app .
+docker run -p 3802:3802 my-app
 ```
 
 ---

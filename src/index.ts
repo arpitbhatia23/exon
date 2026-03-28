@@ -69,7 +69,7 @@ program
         database: database,
       });
 
-      await addDocker(options, language, targetDir);
+      await addDocker(options, language, targetDir, name, database);
       await injectDb(dbTemplate, targetDir);
 
       const pkgPath = path.join(targetDir, "package.json");

@@ -30,11 +30,12 @@ exon-cli create my-api
     ```
   </Step>
   <Step title="Select project options">
-    The CLI will prompt you to pick your preferred language (TypeScript or JavaScript) and database ORM (Prisma, Drizzle, Mongoose, or None).
+    The CLI will prompt you to pick your preferred language (TypeScript or JavaScript), database ORM (Prisma, Drizzle, Mongoose, or None), and whether to enable Docker support.
     
     Exon will then:
     - Copy the selected Express template
     - Scaffold the database connection and models
+    - Generate Docker configuration (`Dockerfile`, `.dockerignore`, and `docker-compose.yml`) if selected
     - Merge any necessary dependencies
   </Step>
   <Step title="Start your server">

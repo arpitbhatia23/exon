@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 import { appendEnv, mergeDbConfigToRoot, mergeDeps } from "./dbHelper.js";
 import { spawn } from "child_process";
 import color from "picocolors";
-import { createDockerFile } from "./dockerHelper.js";
+import { createDockerFile, createDockerComposeFile } from "./dockerHelper.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -174,24 +174,33 @@ export const addDocker = async (
   },
   language: string,
   targetDir: string,
+  projectName: string,
+  database: string,
 ): Promise<void> => {
   let useDocker: boolean;
   if (options.docker) {
     useDocker = true;
+  } else {
+    const USE_DOCKER_OPTIONS = [
+      { label: "Yes", value: true },
+      { label: "No", value: false },
+    ];
+
+    const selected = await select({
+      message: "Do you want to use Docker?",
+      options: USE_DOCKER_OPTIONS,
+    });
+
+    if (isCancel(selected)) {
+      cancel("Project creation cancelled.");
+      process.exit(0);
+    }
+
+    useDocker = selected as boolean;
   }
-  const USE_DOCKER_OPTIONS = [
-    { label: "Yes", value: true },
-    { label: "No", value: false },
-  ];
-
-  const selected = await select({
-    message: "Do you want to use Docker?",
-    options: USE_DOCKER_OPTIONS,
-  });
-
-  useDocker = selected as boolean;
 
   if (useDocker) {
     await createDockerFile(language, targetDir);
+    await createDockerComposeFile(projectName, language, targetDir, database);
   }
 };

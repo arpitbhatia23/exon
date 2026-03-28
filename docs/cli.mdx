@@ -12,19 +12,24 @@ The primary command for Exon CLI is `create`.
   Scaffolds a new Express project in a folder with the specified `<name>`.
 </ParamField>
 
+<ParamField path="--docker, -D" type="option">
+  Enables Docker support immediately, adding a `Dockerfile`, `.dockerignore`, and `docker-compose.yml` to the project.
+</ParamField>
+
 ### Examples
 
-To create a project named `blog-backend`:
+To create a project named `blog-backend` with TypeScript and Docker:
 
 ```bash
-exon-cli create blog-backend
+exon-cli create blog-backend --ts --docker
 ```
 
 ## Interactive Prompts
 
-When you run the `create` command, the CLI walks you through a series of interactive prompts:
+When you run the `create` command without flags, the CLI walks you through a series of interactive prompts:
 
 1. **Language Selection**: Choose between `TypeScript` and `JavaScript`.
 2. **Database ORM**: Choose between `Mongoose`, `Prisma`, `Drizzle`, or `None`.
+3. **Docker Support**: Choose whether to generate a Docker configuration.
 
 Based on your selections, output messages and progress are displayed in the terminal. Exon CLI will also attempt to run `npm install` for you in the newly created folder, so you can immediately begin developing.
