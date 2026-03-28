@@ -35,6 +35,7 @@ When you search for an **Express setup tool**, you usually find the classic `exp
 | **Modern ES Modules (ESM)**        | ✅ Yes                                     | ❌ No (CommonJS)                | ❌ Manual setup           |
 | **Swagger/OpenAPI Built-in**       | ✅ Yes, auto-configured                    | ❌ No                           | ❌ Manual setup           |
 | **Database & ORM Ready**           | ✅ Prisma, Drizzle, Mongoose               | ❌ No                           | ❌ Manual setup           |
+| **Docker Support**                 | ✅ Yes, auto-generated                     | ❌ No                           | ❌ Manual setup           |
 | **Error Handling & Async Wrapper** | ✅ Yes (`asyncHandler`, structured errors) | ❌ No (Callback hell)           | ❌ Manual setup           |
 | **Production Logging**             | ✅ Morgan + Winston configured             | ❌ Basic Morgan only            | ❌ Manual setup           |
 | **Setup Time**                     | **30 Seconds**                             | 2 Minutes (but no modern tools) | 30–60 Minutes             |
