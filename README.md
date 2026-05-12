@@ -60,36 +60,54 @@ Exon CLI acts as the "Create React App" or "Next.js" equivalent for Express APIs
 ## 📦 Installation
 
 ### Option 1: Use with npx (Recommended)
-
 Generate your boilerplate instantly without installing packages globally:
-
 ```bash
 npx exon-cli create my-express-app
 ```
 
 ### Option 2: Install Globally
-
 ```bash
 npm install -g exon-cli
 ```
 
 ---
 
-## 🔌 Plugin Management
+## 🛠️ CLI Commands & Options
 
-Exon CLI now supports adding or removing features even after project creation!
+### 1. `create <name>`
+Scaffold a new Express project. You can use flags to skip the interactive prompts.
 
-### Add a Plugin
+| Flag | Description |
+| :--- | :--- |
+| `-t, --ts` | Use TypeScript (Recommended) |
+| `-j, --js` | Use JavaScript |
+| `-m, --mongoose` | Use Mongoose ODM (MongoDB) |
+| `-p, --prisma` | Use Prisma ORM (PostgreSQL, MySQL, etc.) |
+| `-d, --drizzle` | Use Drizzle ORM |
+| `-D, --docker` | Enable Docker support |
+| `-L, --logger` | Enable Morgan & Winston logging |
+| `-S, --swagger` | Enable Swagger API documentation |
+
+**Example:**
 ```bash
-npx exon-cli add <plugin-name>
+npx exon-cli create my-api --ts --prisma --docker
 ```
 
-### Remove a Plugin
-```bash
-npx exon-cli remove <plugin-name>
-```
+### 2. `add <plugin>`
+Add a feature/plugin to an existing Exon project. Run this inside your project directory.
 
 **Available Plugins:** `docker`, `prisma`, `mongoose`, `drizzle`, `logger`, `swagger`
+
+```bash
+npx exon-cli add logger
+```
+
+### 3. `remove <plugin>`
+Remove a feature/plugin from your project.
+
+```bash
+npx exon-cli remove swagger
+```
 
 ---
 
