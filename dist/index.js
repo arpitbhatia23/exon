@@ -3,11 +3,18 @@ import { Command } from "commander";
 import chalk from "chalk";
 import figlet from "figlet";
 import path from "path";
-import { resolveDbTemplate } from "./resolveDbTemplates.js";
-const program = new Command();
 import pkg from "../package.json" with { type: "json" };
+import fs from "fs";
 import { cancel, intro, spinner } from "@clack/prompts";
-import { addDocker, copyTemplate, injectDb, installdependencies, selectDatabase, selectLanguage, } from "./prompt.js";
+import { copyTemplate, installdependencies, selectDatabase, selectLanguage, } from "./core/prompt.js";
+import { plugins } from "./plugins/index.js";
+import { runPlugins } from "./plugins/runPlugin.js";
+import { createProjectConfig } from "./core/project/createProjectConfig.js";
+import { addcommand } from "./commands/addCommand.js";
+import { removeCommand } from "./commands/removeCommand.js";
+const program = new Command();
+program.addCommand(addcommand);
+program.addCommand(removeCommand);
 /* This part of the code is setting up the configuration for the CLI program using the `Command` class
 from the `commander` package. Here's a breakdown of what it's doing: */
 program
@@ -39,20 +46,37 @@ program
     .option("--prisma, -p", "use Prisma ORM")
     .option("--drizzle, -d", "use Drizzle ORM")
     .option("--docker, -D", "enable Docker support")
+    .option("--logger, -L", "enable Morgan & Winston logging")
+    .option("--swagger, -S", "enable Swagger API documentation")
     .action(async (name, options) => {
     intro(chalk.cyan("EXON → Initializing project...."));
     const s = spinner({ indicator: "dots" });
     try {
+        const targetDir = path.resolve(process.cwd(), name);
+        if (fs.existsSync(targetDir)) {
+            cancel(` A folder named "${name}" already exists.\n` +
+                `Please choose a different project name.`);
+            process.exit(1);
+        }
         let language = await selectLanguage(options);
         let database = await selectDatabase(options);
-        const targetDir = path.resolve(process.cwd(), name);
         await copyTemplate(language, name, targetDir, s);
-        const dbTemplate = resolveDbTemplate({
-            language: language,
-            database: database,
+        const context = {
+            language,
+            projectName: name,
+            targetDir,
+            database,
+            options,
+        };
+        // await addDocker(options, language, targetDir, name, database);
+        await runPlugins(plugins, context);
+        await createProjectConfig(targetDir, {
+            language,
+            database,
+            plugins: plugins
+                .filter((plugin) => plugin.shouldRun(context))
+                .map((plugin) => plugin.name),
         });
-        await addDocker(options, language, targetDir, name, database);
-        await injectDb(dbTemplate, targetDir);
         const pkgPath = path.join(targetDir, "package.json");
         await installdependencies(s, pkgPath, targetDir);
     }
@@ -63,5 +87,5 @@ program
         }
     }
 });
-program.parse(process.argv);
+await program.parseAsync(process.argv);
 //# sourceMappingURL=index.js.map

@@ -1,0 +1,56 @@
+---
+title: Plugins
+description: Extend your project with additional features
+icon: plug
+---
+
+Exon CLI's plugin system allows you to add or remove core features after your project has been scaffolded. This flexibility ensures that your project can evolve as your requirements change.
+
+## Available Plugins
+
+Currently, Exon supports the following plugins:
+
+- **docker**: Adds production-ready Docker configuration (Dockerfile, docker-compose.yml).
+- **prisma**: Integrates the Prisma ORM.
+- **mongoose**: Integrates the Mongoose ODM.
+- **drizzle**: Integrates the Drizzle ORM.
+- **logger**: Adds a production-ready logging system with Morgan and Winston.
+- **swagger**: Adds auto-generated Swagger/OpenAPI documentation.
+
+## Managing Plugins
+
+### Adding a Plugin
+
+To add a plugin to your existing Exon project, run the `add` command from your project's root directory:
+
+```bash
+npx exon-cli add <plugin-name>
+```
+
+For example, to add Docker support:
+
+```bash
+npx exon-cli add docker
+```
+
+### Removing a Plugin
+
+If you no longer need a specific feature, you can remove it using the `remove` command:
+
+```bash
+npx exon-cli remove <plugin-name>
+```
+
+This will remove the associated files and update your project's configuration.
+
+## Project Configuration
+
+When you create a project or add a plugin, Exon creates or updates an `exon.config.json` file in your project root. This file keeps track of the project's language, database, and installed plugins.
+
+```json
+{
+  "language": "typescript",
+  "database": "PRISMA",
+  "plugins": ["docker", "prisma"]
+}
+```

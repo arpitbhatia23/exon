@@ -16,6 +16,14 @@ The primary command for Exon CLI is `create`.
   Enables Docker support immediately, adding a `Dockerfile`, `.dockerignore`, and `docker-compose.yml` to the project.
 </ParamField>
 
+<ParamField path="add <plugin>" type="command">
+  Adds a new plugin (e.g., `docker`, `prisma`, `mongoose`, `drizzle`) to an existing Exon project.
+</ParamField>
+
+<ParamField path="remove <plugin>" type="command">
+  Removes an existing plugin and its associated files from the project.
+</ParamField>
+
 ### Examples
 
 To create a project named `blog-backend` with TypeScript and Docker:

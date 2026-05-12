@@ -17,7 +17,8 @@
         "pages": [
           "docs/index",
           "docs/getting-started",
-          "docs/cli"
+          "docs/cli",
+          "docs/plugins"
         ]
       },
       {
