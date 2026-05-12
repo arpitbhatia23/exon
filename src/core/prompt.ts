@@ -1,12 +1,10 @@
 import { cancel, isCancel, outro, select } from "@clack/prompts";
-import { DB_OPTIONS, LANG_OPTION } from "./options.js";
+import { DB_OPTIONS, LANG_OPTION } from "../types/options.js";
 import path from "path";
 import fs from "fs-extra";
 import { fileURLToPath } from "url";
-import { appendEnv, mergeDbConfigToRoot, mergeDeps } from "./dbHelper.js";
 import { spawn } from "child_process";
 import color from "picocolors";
-import { createDockerFile, createDockerComposeFile } from "./dockerHelper.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -87,7 +85,7 @@ export const copyTemplate = async (
       ? "node-express-template-ts"
       : "node-express-template-js";
 
-  const templateDir = path.resolve(__dirname, "../templates", templateName);
+  const templateDir = path.resolve(__dirname, "../../templates", templateName);
   if (!fs.existsSync(templateDir)) {
     cancel("Template Not Found!");
   }
@@ -107,28 +105,6 @@ export const copyTemplate = async (
 
   if (!fs.existsSync(targetDir)) {
     cancel(`something went wrong while creating ${targetDir}`);
-  }
-};
-
-export const injectDb = async (
-  dbTemplate: string | null,
-  targetDir: string,
-): Promise<void> => {
-  if (dbTemplate) {
-    const dbDir = path.join(__dirname, "../templates/db", dbTemplate);
-    fs.copySync(dbDir, `${targetDir}/src/db`, {
-      filter: (src) =>
-        ![
-          "env.append",
-          "deps.json",
-          "drizzle.config.js",
-          "drizzle.config.ts",
-        ].some((f) => src.includes(f)),
-    });
-
-    mergeDeps(targetDir, path.join(dbDir, "deps.json"));
-    appendEnv(targetDir, path.join(dbDir, "env.append"));
-    mergeDbConfigToRoot(targetDir, dbDir);
   }
 };
 
@@ -166,41 +142,4 @@ export const installdependencies = async (
       color.dim(`Star the repo to support the project: `) +
       color.cyan(color.underline("https://github.com/arpitbhatia23/exon")),
   );
-};
-
-export const addDocker = async (
-  options: {
-    docker?: string;
-  },
-  language: string,
-  targetDir: string,
-  projectName: string,
-  database: string,
-): Promise<void> => {
-  let useDocker: boolean;
-  if (options.docker) {
-    useDocker = true;
-  } else {
-    const USE_DOCKER_OPTIONS = [
-      { label: "Yes", value: true },
-      { label: "No", value: false },
-    ];
-
-    const selected = await select({
-      message: "Do you want to use Docker?",
-      options: USE_DOCKER_OPTIONS,
-    });
-
-    if (isCancel(selected)) {
-      cancel("Project creation cancelled.");
-      process.exit(0);
-    }
-
-    useDocker = selected as boolean;
-  }
-
-  if (useDocker) {
-    await createDockerFile(language, targetDir);
-    await createDockerComposeFile(projectName, language, targetDir, database);
-  }
 };

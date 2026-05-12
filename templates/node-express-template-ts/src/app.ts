@@ -3,8 +3,7 @@ import express from "express"; // Express framework for building backend APIs
 import cors from "cors"; // Middleware to handle Cross-Origin Resource Sharing
 import cookieParser from "cookie-parser"; // Middleware to parse cookies
 import { rateLimiter } from "express-rate-shield";
-import { swaggerSpec } from "./swagger.config.js";
-import swaggerUi from "swagger-ui-express";
+// EXON_INJECTION_IMPORT
 // Initialize Express app
 const app = express();
 
@@ -42,10 +41,7 @@ app.use(express.static("public"));
 // Parse cookies attached to incoming requests
 app.use(cookieParser());
 
-// -------------------- logger --------------------
-
-import morganLogger from "./middleware/morgan.middleware.js";
-app.use(morganLogger);
+// EXON_INJECTION_LOGGER
 
 // Import your route definitions
 import indexRouter from "./routes/index.route";
@@ -54,9 +50,7 @@ import healthCheckRoute from "./routes/heathCheck.route";
 app.use(indexRouter);
 app.use("/api/v1", healthCheckRoute);
 
-// -------------------- api docs --------------------
-
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// EXON_INJECTION_SWAGGER
 
 // -------------------- Export app --------------------
 

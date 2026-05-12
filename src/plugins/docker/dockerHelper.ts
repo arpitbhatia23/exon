@@ -1,6 +1,6 @@
 import path from "path";
 import fs from "fs/promises";
-
+import { cancel, isCancel, select } from "@clack/prompts";
 export const createDockerFile = async (
   language: string,
   targetDir: string,
@@ -122,5 +122,17 @@ volumes:
   }
 
   await fs.writeFile(composeFilePath, content.trim(), "utf-8");
-  console.log(`Docker Compose file with ${database} support created at ${composeFilePath}`);
+  console.log(
+    `Docker Compose file with ${database} support created at ${composeFilePath}`,
+  );
+};
+
+export const addDocker = async (
+  language: string,
+  targetDir: string,
+  projectName: string,
+  database: string,
+): Promise<void> => {
+  await createDockerFile(language, targetDir);
+  await createDockerComposeFile(projectName, language, targetDir, database);
 };

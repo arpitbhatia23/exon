@@ -75,6 +75,24 @@ npm install -g exon-cli
 
 ---
 
+## 🔌 Plugin Management
+
+Exon CLI now supports adding or removing features even after project creation!
+
+### Add a Plugin
+```bash
+npx exon-cli add <plugin-name>
+```
+
+### Remove a Plugin
+```bash
+npx exon-cli remove <plugin-name>
+```
+
+**Available Plugins:** `docker`, `prisma`, `mongoose`, `drizzle`, `logger`, `swagger`
+
+---
+
 ## 🎮 Interactive Express Generator Flow
 
 When you run the command, Exon CLI provides an easy semantic workflow:

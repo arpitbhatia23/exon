@@ -8,7 +8,7 @@ export function mergeDeps(targetDir: string, depsPath: string) {
 
   if (!fs.existsSync(pkgPath)) {
     throw new Error(
-      `package.json not found at ${pkgPath}. Template copy may have failed.`
+      `package.json not found at ${pkgPath}. Template copy may have failed.`,
     );
   }
 
@@ -34,7 +34,7 @@ export function appendEnv(targetDir: string, envPath: string) {
 
   fs.appendFileSync(
     path.join(targetDir, ".env"),
-    "\n" + fs.readFileSync(envPath, "utf-8")
+    "\n" + fs.readFileSync(envPath, "utf-8"),
   );
 }
 
