@@ -17,6 +17,7 @@ export interface pluginContext {
     docker?: string;
     logger?: string;
     swagger?: string;
+    socket?: string;
   };
 }
-export type PluginType = "database" | "feature" | "deployment";
+export type PluginType = 'database' | 'feature' | 'deployment';

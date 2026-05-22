@@ -1,95 +1,119 @@
 ---
-title: Core API Reference
-description: Dive into the internal helper functions and core logic of Exon CLI
+title: "Core API Technical Reference - Exon CLI"
+description: "An in-depth code documentation of Exon CLI's internal architecture, helper functions, dependency merging, and docker builders."
 icon: code
+keywords:
+  - express generator api
+  - node js cli internal architecture
+  - express boilerplate builder logic
+  - dependency merger node js
+  - custom generator script
 ---
 
-This page documents the key functions used by the Exon CLI in `src`.
+# ⚙️ Core API Reference
 
-## Database Templates
+This technical reference manual documents the internal functions and helper modules that power Exon CLI's compilation engine under the hood. Use this guide if you are developing custom plugins, modifying scaffolding behaviors, or integrating Exon into your own automation pipelines.
+
+---
+
+## 🗄️ Database Resolvers
 
 ### `resolveDbTemplate`
 
-<ParamField path="a" type="Object">
-  An object containing `language` (TypeScript | JavaScript) and `database` (Mongoose | Prisma | Drizzle | None).
+Determines the relative path to the database template folder based on the user's primary programming language and target database ORM/ODM.
+
+<ParamField path="options" type="Object" required>
+  <Expandable title="properties">
+    <ParamField path="language" type="string" required>
+      Programming language chosen. Expected values: `TypeScript` or `JavaScript`.
+    </ParamField>
+    <ParamField path="database" type="string" required>
+      Database ORM selection. Expected values: `Mongoose`, `Prisma`, `Drizzle`, or `None`.
+    </ParamField>
+  </Expandable>
 </ParamField>
 
 <ResponseField name="return value" type="string | null">
-  Returns a relative template path string like `mongoose/ts` or `prisma/js`. Returns `null` when `None`.
+  Returns a relative template folder path (e.g., `mongoose/ts` or `prisma/js`). Returns `null` if database is set to `None`.
 </ResponseField>
 
-Determines which local database template path to use. Reference: [src/resolveDbTemplates.ts](https://github.com/arpitbhatia23/exon/blob/main/src/resolveDbTemplates.ts)
+```typescript Example usage
+const path = resolveDbTemplate({ language: 'TypeScript', database: 'Prisma' });
+console.log(path); // Output: "prisma/ts"
+```
 
-## Configuration Merging
+---
+
+## 🔄 Dependency & Environment Merging
 
 ### `mergeDeps`
 
-<ParamField path="targetDir" type="string">
-  Path to the generated project root.
+Reads dependency declarations from the plugin/database template folder's `deps.json` and safely merges them into the root `package.json` of the scaffolded application.
+
+<ParamField path="targetDir" type="string" required>
+  The absolute file system path to the target generated project root.
 </ParamField>
-<ParamField path="depsPath" type="string">
-  Path to a `deps.json` file inside the template folder.
+<ParamField path="depsPath" type="string" required>
+  The absolute path to the `deps.json` file inside the target template.
 </ParamField>
 
-Merges `deps.json` into the new project's `package.json`. It reads `package.json` at `targetDir`, merges dependencies, devDependencies, and scripts from `depsPath`, and writes back.
+*   **Mechanism**: Automatically detects and aggregates `dependencies`, `devDependencies`, and `scripts` blocks, overwriting existing package version entries only if the template specifies a newer version.
+
+---
 
 ### `appendEnv`
 
-<ParamField path="targetDir" type="string">
-  Path to the generated project root.
+Appends environment configurations to the generated project's `.env` configuration file without erasing existing variables.
+
+<ParamField path="targetDir" type="string" required>
+  The absolute file system path to the target generated project root.
 </ParamField>
-<ParamField path="envPath" type="string">
-  Path to the environment variables block.
+<ParamField path="envPath" type="string" required>
+  The absolute path to the `env.append` file containing the environment variables to append.
 </ParamField>
 
-Appends contents of `env.append` to the project's `.env` if present.
+---
 
 ### `mergeDbConfigToRoot`
 
+Copies database configuration templates directly into the project's root or `src/db/` directory, while automatically filtering out builder files (`env.append`, `deps.json`, internal scripts, and schema files that are compiled separately).
+
 <ParamField path="targetDir" type="string" required>
-  Path to the generated project root.
+  The absolute file system path to the target generated project root.
 </ParamField>
 <ParamField path="templateDir" type="string" required>
-  Path to the selected DB template folder.
+  The absolute path to the selected DB template folder source.
 </ParamField>
 
-Copies database config files from `templateDir` into `targetDir`, filtering out CLI internal files such as `env.append`, `deps.json`, template entrypoints, and Prisma schema (if present). Reference: [src/dbHelper.ts](https://github.com/arpitbhatia23/exon/blob/main/src/dbHelper.ts)
+---
 
-## Docker Support
+## 🐳 Containerization Builders
 
 ### `addDocker`
 
-<ParamField path="options" type="Object">
-  Command-line options including `docker`.
+Orchestrates the creation and setup of Docker files. Checks the command-line options and, if the `--docker` flag is absent, displays interactive prompts to confirm setup with the developer.
+
+<ParamField path="options" type="Object" required>
+  CLI parameters parsed from `commander`.
 </ParamField>
-<ParamField path="language" type="string">
-  Selected language (TypeScript | JavaScript).
+<ParamField path="language" type="string" required>
+  Language choice: `TypeScript` | `JavaScript`.
 </ParamField>
-<ParamField path="targetDir" type="string">
-  Path to the generated project root.
+<ParamField path="targetDir" type="string" required>
+  The absolute file system path to the target generated project root.
 </ParamField>
 
-Handles the Docker setup logic. It checks for the `--docker` flag and, if not present, prompts the user to enable Docker support.
+---
 
 ### `createDockerFile`
 
-<ParamField path="language" type="string">
-  Selected language (TypeScript | JavaScript).
+Compiles and writes an optimized, multi-stage `Dockerfile` and a `.dockerignore` file matching the project's framework features.
+
+<ParamField path="language" type="string" required>
+  Language choice: `TypeScript` | `JavaScript`.
 </ParamField>
-<ParamField path="targetDir" type="string">
-  Path to the generated project root.
+<ParamField path="targetDir" type="string" required>
+  The absolute file system path to the target generated project root.
 </ParamField>
 
-Generates an optimized `Dockerfile` and `.dockerignore` based on the project's language in `targetDir`.
-
-## Main CLI Flow
-
-### `index` (CLI entry)
-
-`src/index.ts` orchestrates the entire flow using `commander` and `@clack/prompts`:
-
-1. Build template path from language
-2. Copy template to target folder
-3. Resolve and copy DB template (if selected)
-4. **Generate Docker configuration (if enabled)**
-5. Merge deps, append env, merge DB config, and run `npm install`
+*   **Output Details**: Scaffolds a lightweight, multi-stage Docker build separating intermediate compilation steps from runtime container execution, ensuring ultra-small target production image sizes.

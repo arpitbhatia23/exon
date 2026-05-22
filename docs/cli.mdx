@@ -1,43 +1,132 @@
 ---
-title: CLI Usage
-description: Explore the available commands and workflow
+title: "CLI Commands & Options Reference - Exon CLI"
+description: "A complete command-line interface documentation for Exon CLI. Master the create command, project generation flags, and dynamic plugin management."
 icon: terminal
+keywords:
+  - express generator command
+  - express cli options
+  - create-express-app flags
+  - node express command line tool
+  - add plugin command exon
 ---
 
-## Commands
+# 💻 Command-Line Interface Reference
 
-The primary command for Exon CLI is `create`.
+Exon CLI is highly flexible, supporting both automated script workflows (via options/flags) and comfortable manual workflows (via interactive terminal prompt questions).
 
-<ParamField path="create <name>" type="command">
-  Scaffolds a new Express project in a folder with the specified `<name>`.
-</ParamField>
+---
 
-<ParamField path="--docker, -D" type="option">
-  Enables Docker support immediately, adding a `Dockerfile`, `.dockerignore`, and `docker-compose.yml` to the project.
-</ParamField>
+## ⚡ Project Creation: `create`
 
-<ParamField path="add <plugin>" type="command">
-  Adds a new plugin (e.g., `docker`, `prisma`, `mongoose`, `drizzle`) to an existing Exon project.
-</ParamField>
-
-<ParamField path="remove <plugin>" type="command">
-  Removes an existing plugin and its associated files from the project.
-</ParamField>
-
-### Examples
-
-To create a project named `blog-backend` with TypeScript and Docker:
+Scaffold a brand-new Express.js API instantly.
 
 ```bash
-exon-cli create blog-backend --ts --docker
+# General Syntax
+exon-cli create <project-name> [options]
 ```
 
-## Interactive Prompts
+### Options & Flags
 
-When you run the `create` command without flags, the CLI walks you through a series of interactive prompts:
+Customize the generated boilerplate template by appending these flags:
 
-1. **Language Selection**: Choose between `TypeScript` and `JavaScript`.
-2. **Database ORM**: Choose between `Mongoose`, `Prisma`, `Drizzle`, or `None`.
-3. **Docker Support**: Choose whether to generate a Docker configuration.
+<ParamField path="--ts, -t" type="flag">
+  Bootstrap a **TypeScript** project environment. This is the default setting. Generates structured `.ts` entrypoints, custom type definitions, and a rigid, high-performance `tsconfig.json`.
+</ParamField>
 
-Based on your selections, output messages and progress are displayed in the terminal. Exon CLI will also attempt to run `npm install` for you in the newly created folder, so you can immediately begin developing.
+<ParamField path="--js, -j" type="flag">
+  Bootstrap a **JavaScript** project environment using modern **ES Module** (`import`/`export`) syntax instead of traditional CommonJS (`require`).
+</ParamField>
+
+<ParamField path="--prisma, -p" type="flag">
+  Pre-integrate **Prisma ORM** inside the `src/db` directory. Scaffolds initial connection clients, migration setups, and schema definitions.
+</ParamField>
+
+<ParamField path="--mongoose, -m" type="flag">
+  Pre-integrate **Mongoose ODM** inside the `src/db` directory. Generates ready-to-use MongoDB clients, connection configurations, and schema templates.
+</ParamField>
+
+<ParamField path="--drizzle, -d" type="flag">
+  Pre-integrate **Drizzle ORM** inside the `src/db` directory. Pre-loads database adapters, migration schemas, and configuration parameters.
+</ParamField>
+
+<ParamField path="--docker, -D" type="flag">
+  Add containerization support instantly. Generates a production-ready multi-stage `Dockerfile`, a `.dockerignore` file, and a complete `docker-compose.yml` local orchestration setup.
+</ParamField>
+
+<ParamField path="--logger, -L" type="flag">
+  Enable structured enterprise logging. Installs and configures **Winston** (console + rotating file logging) and **Morgan** HTTP request middleware.
+</ParamField>
+
+<ParamField path="--swagger, -S" type="flag">
+  Auto-generate interactive API documentation. Configures **Swagger UI** endpoints available at `/docs` with sample route schemas.
+</ParamField>
+
+<ParamField path="--socket" type="flag">
+  Enable real-time **Socket.IO** server support. Scaffolds connection handlers, listener events, and binds them to the primary HTTP server.
+</ParamField>
+
+### Setup Examples
+
+<CodeGroup>
+```bash Fully Loaded (TypeScript)
+# Generate a strict TS api with Prisma database support and Docker containerization:
+npx exon-cli create ecommerce-api --ts --prisma --docker --swagger
+```
+
+```bash Lightweight (JavaScript)
+# Generate a lightweight JavaScript API with Mongoose database and Swagger documentation:
+npx exon-cli create microservice-api --js --mongoose --swagger
+```
+</CodeGroup>
+
+---
+
+## 🔌 Feature Plugin Management: `add` & `remove`
+
+Exon's design allows you to add or remove core tech stacks dynamically as your repository grows. These commands must be executed within your Exon project's root folder.
+
+### Adding a Plugin
+
+```bash
+# General Syntax
+exon-cli add <plugin-name>
+```
+
+#### Available Plugins:
+*   `prisma`: Install and scaffold the Prisma ORM.
+*   `mongoose`: Install and scaffold the Mongoose MongoDB ODM.
+*   `drizzle`: Install and scaffold the Drizzle ORM.
+*   `docker`: Scaffold Docker files and multi-stage configurations.
+*   `logger`: Add Winston & Morgan logger layers.
+*   `swagger`: Add Swagger documentation configuration.
+*   `socket`: Add Socket.IO realtime server modules.
+
+```bash Example
+npx exon-cli add docker
+```
+
+---
+
+### Removing a Plugin
+
+If you no longer require a specific tool or ORM in your setup, you can remove it cleanly. Exon CLI will automatically strip files and configuration imports.
+
+```bash
+# General Syntax
+exon-cli remove <plugin-name>
+```
+
+```bash Example
+npx exon-cli remove mongoose
+```
+
+---
+
+## 📋 General Global Options
+
+Manage Exon's runtime parameters:
+
+| Flag | Shorthand | Description |
+| :--- | :---: | :--- |
+| `--version` | `-v` | Output the current version of Exon CLI installed. |
+| `--help` | `-h` | Display the interactive help manual explaining all commands. |

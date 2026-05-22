@@ -1,51 +1,100 @@
 ---
-title: Getting Started
-description: Set up Exon CLI and generate your first backend
+title: "Getting Started with Exon CLI - Express Project Scaffolding"
+description: "A complete step-by-step installation and configuration guide to scaffold your first high-performance Express.js API using Exon CLI."
 icon: rocket
+keywords:
+  - express generator install
+  - create express app guide
+  - typescript express boilerplates
+  - node js backend generator
+  - scaffold express project
 ---
 
-## Installation
+# 🚀 Getting Started
 
-You can use Exon CLI via `npx` or install it globally.
+Exon CLI is designed to get you from a blank terminal to a fully-functioning, production-ready Express.js API in less than a minute. Let's install the CLI tool and build your first application.
+
+---
+
+## 📦 Installation Options
+
+Exon CLI can be executed directly without installation using `npx` (highly recommended to ensure you always use the latest version) or installed globally on your machine.
 
 <CodeGroup>
 ```bash npx (Recommended)
+# Run once to instantly scaffold your backend:
 npx exon-cli create my-api
 ```
 
-```bash Global install
-npm i -g exon-cli
+```bash Global Installation
+# Install globally on your local system:
+npm install -g exon-cli
+
+# Scaffold projects using the global command:
 exon-cli create my-api
 ```
 </CodeGroup>
 
-## Create a New Project
+---
+
+## 🛠️ Step-by-Step Project Scaffolding
+
+Follow these simple steps to customize your new backend service using Exon's interactive CLI prompts.
 
 <Steps>
-  <Step title="Run the setup command">
-    Run the `create` command in your terminal. This will start the interactive setup.
-
+  <Step title="Initialize the CLI Creator">
+    Open your terminal, navigate to your desired directory, and start the project builder:
+    
     ```bash
-    exon-cli create my-api
+    npx exon-cli create my-express-api
     ```
   </Step>
-  <Step title="Select project options">
-    The CLI will prompt you to pick your preferred language (TypeScript or JavaScript), database ORM (Prisma, Drizzle, Mongoose, or None), and whether to enable Docker support.
+
+  <Step title="Select Your Technology Stack">
+    The interactive console will ask you to customize your server architecture:
     
-    Exon will then:
-    - Copy the selected Express template
-    - Scaffold the database connection and models
-    - Generate Docker configuration (`Dockerfile`, `.dockerignore`, and `docker-compose.yml`) if selected
-    - Merge any necessary dependencies
+    1. **Choose Programming Language**: Select between `TypeScript` (pre-configured strict checking) or `JavaScript` (ES Module format).
+    2. **Choose Database ORM/ODM**: Pick `Prisma`, `Drizzle`, `Mongoose` (MongoDB), or `None` if you are building a database-less utility.
+    3. **Enable Container Support**: Toggle `Docker` to generate immediate, optimized container structures.
   </Step>
-  <Step title="Start your server">
-    After the CLI completes the setup and runs `npm install`, change into the directory and start your backend:
+
+  <Step title="Automatic Scaffolding & Dependency Merging">
+    Exon CLI will now work its magic:
+    *   Creates a workspace matching your selected language.
+    *   Injects specific database connection helpers and pre-designed models.
+    *   Generates optimized container files (`Dockerfile`, `docker-compose.yml`) if selected.
+    *   Aggregates and resolves package dependencies (`package.json`).
+    *   Automatically runs `npm install` to download dependencies cleanly.
+  </Step>
+
+  <Step title="Run Your Express Development Server">
+    Navigate into your newly created project folder and launch the hot-reloading development server:
 
     ```bash
-    cd my-api
-    npm start
+    cd my-express-api
+    npm run dev
     ```
+
+    By default, your server will boot up and listen for requests at:
     
-    Your server will be running on `http://localhost:3802` by default.
+    ```txt
+    http://localhost:3802
+    ```
   </Step>
 </Steps>
+
+---
+
+## 🔍 Verifying the Setup
+
+To verify that your new backend application is fully operational:
+
+1.  **Check Status Endpoint**: Send a `GET` request to `http://localhost:3802/status` (or your configured root route) to verify that the Express app is running smoothly.
+2.  **View Swagger Docs**: If you enabled the **Swagger** plugin, open your browser and navigate to:
+    
+    ```txt
+    http://localhost:3802/docs
+    ```
+    
+    You should see the interactive Swagger UI showing all pre-configured REST API routes ready for manual testing.
+3.  **Inspect Environment Variables**: Review the newly created `.env` file to configure port values, database connection credentials, and logger profiles.

@@ -1,26 +1,84 @@
 ---
-title: Exon CLI
-description: Generate production-ready Express.js APIs in under 30 seconds
+title: "Exon CLI - Express Generator & TypeScript Scaffolding CLI"
+description: "The ultimate modern Express generator. Bootstrap production-ready Express.js APIs with TypeScript, ORMs (Prisma, Drizzle, Mongoose), Swagger, Docker, and logging in 30 seconds."
+keywords:
+  - express generator
+  - express generator ts
+  - typescript express generator
+  - express-generator
+  - express project generator
+  - create express app
+  - express boilerplate cli
+  - express js scaffolding
+  - node express cli
+  - express starter kit
 ---
 
-Exon is a lightweight CLI tool to scaffold production-ready Express.js APIs quickly. It provides JavaScript and TypeScript templates, optional database configurations (Mongoose, Prisma, Drizzle), and built-in Docker support.
+# ⚡ Express Generator for Modern Node.js APIs
 
-## Quick Links
+Welcome to the official documentation for **Exon CLI**, the premium, zero-config **Express generator** and TypeScript API scaffolding engine. 
+
+Exon CLI is designed for developers who are tired of spending hours manually configuring environments, transpilers, containers, databases, and logging. It is a modern, extensible replacement for the legacy `express-generator` CLI, built from the ground up to follow modern enterprise architecture best practices.
+
+<CardGroup cols={3}>
+  <Card title="Quick Setup" icon="bolt" color="#e9d5ff">
+    Bootstrap a brand-new backend in 30 seconds.
+  </Card>
+  <Card title="TypeScript & ESM" icon="code" color="#cbd5e1">
+    Fully configured compilation, strict types, and ES modules.
+  </Card>
+  <Card title="Database Ready" icon="database" color="#fef08a">
+    Prisma, Drizzle, and Mongoose pre-integrated out of the box.
+  </Card>
+</CardGroup>
+
+---
+
+## ⚡ What Makes Exon Unique?
+
+Unlike simple boilerplates that become stale quickly, Exon CLI utilizes a **decoupled plugin architecture**. This allows you to scale your application's tech stack incrementally by adding or removing features dynamically via the terminal.
+
+```bash
+# Generate a new project in seconds
+npx exon-cli create my-api
+
+# Dynamically add features as your project grows
+npx exon-cli add swagger
+npx exon-cli add docker
+```
+
+---
+
+## 🗺️ Explore the Documentation
+
+Get up and running with our comprehensive step-by-step guides and references.
 
 <CardGroup cols={2}>
   <Card title="Getting Started" icon="rocket" href="/docs/getting-started">
-    Install Exon CLI and start generating your backends instantly.
+    Install Exon CLI, set up your environment, and generate your first backend server.
   </Card>
   <Card title="CLI Reference" icon="terminal" href="/docs/cli">
-    Explore all available commands and interactive prompts.
+    Learn about the interactive prompt engine, flags, and `create`, `add`, and `remove` commands.
   </Card>
-  <Card title="Core API" icon="code" href="/docs/api">
-    Dive into the internal API functions and architecture.
+  <Card title="Plugins System" icon="plug" href="/docs/plugins">
+    Extend your scaffolded project with Winston, Swagger, Docker, ORMs, and Socket.IO.
   </Card>
-  <Card title="Templates" icon="layer-group" href="/docs/templates">
-    Learn about the JavaScript, TypeScript, and database templates.
+  <Card title="Templates & Architecture" icon="layer-group" href="/docs/templates">
+    Inspect our clean, scalable ES modules directory structure and file responsibilities.
   </Card>
-  <Card title="Plugins" icon="plug" href="/docs/plugins">
-    Extend your project with Docker, ORMs, and more after setup.
+  <Card title="Core API Reference" icon="code" href="/docs/api">
+    Dive deep into Exon's internal scaffolding functions, dependency mergers, and helpers.
+  </Card>
+  <Card title="Contributing Guide" icon="hands-helping" href="/docs/contributing">
+    Help the community by creating custom templates, optimizing plugins, or refining the CLI.
   </Card>
 </CardGroup>
+
+---
+
+## 🚀 Key Architectural Highlights
+
+*   **Zero Boilerplate**: No need to spend hours creating configurations.
+*   **Production Standards**: Pre-configured global exception handling, asynchronous wrapper catch utilities, and structured response types.
+*   **Interactive Testing**: Full Swagger UI endpoints automatically generated under `/docs`.
+*   **Ready-to-Deploy**: Build Docker containers immediately with optimized multi-stage build configurations.

@@ -1,28 +1,75 @@
 ---
-title: Contributing
-description: Make your first open-source contribution to Exon CLI
+title: "Contributing to Exon - Express Scaffolding Open Source"
+description: "A comprehensive developer's guide to contributing code, templates, and plugins to the Exon CLI open-source repository."
 icon: hands-helping
+keywords:
+  - express generator open source
+  - contribute to express cli
+  - node js scaffolding library
+  - github open source backend generator
+  - create custom express template
 ---
 
-Thanks for considering contributing to Exon! We always welcome community PRs. Follow these basic guidelines to get started.
+# 🤝 Contributing to Exon CLI
 
-## Workflow
+Thank you for your interest in making backend development faster and easier for the Node.js community! Exon is an open-source project, and we welcome contributions of all kinds—from documentation edits and bug reports to feature plugins and custom project templates.
+
+---
+
+## 🛠️ Local Development & Scaffolding Workflow
+
+To begin modifying the CLI locally, follow these simple steps to prepare your development environment:
 
 <Steps>
-  <Step title="Clone & Branch">
-    Fork and clone the repository, then create a new branch for your specific feature or fix.
+  <Step title="Fork and Clone the Repository">
+    Fork the main repository on GitHub to your account, and clone it locally:
+    
+    ```bash
+    git clone https://github.com/arpitbhatia23/exon.git
+    cd exon
+    ```
   </Step>
-  <Step title="Run CLI Locally">
-    Always run and test CLI changes locally before submitting. Use `node ./dist/bin/exon.js` after building, or run your typical TypeScript dev flow.
+
+  <Step title="Install Dependencies & Build">
+    Download the core packages and run the TypeScript compilation process:
+    
+    ```bash
+    npm install
+    npm run build
+    ```
   </Step>
-  <Step title="Create Pull Request">
-    Keep your changes focused. Open a Pull Request from your branch against the main repository and write a clear, descriptive PR title and body.
+
+  <Step title="Run and Test the CLI Locally">
+    Link the executable or execute the compiled output directly using Node to test your changes against a temporary folder:
+    
+    ```bash
+    # Execute the local build directly:
+    node ./dist/index.js create test-app
+    ```
+  </Step>
+
+  <Step title="Create a Focused Pull Request">
+    Commit your code to a clean feature branch and open a Pull Request (PR) on GitHub. Ensure your description details:
+    *   What problem or feature is being addressed.
+    *   Any new files, dependencies, or variables injected.
+    *   Verification tests performed.
   </Step>
 </Steps>
 
-## Adding Template Updates
+---
 
-If adding templates or touching the scaffold generation, ensure:
-- Template folders are complete and tested internally.
-- Include `deps.json` and `env.append` if external dependencies/environment variables are required.
-- Any runtime scripts referenced in `package.json` are cross-platform friendly (Windows, macOS, Linux).
+## 🔏 Coding & Quality Standards
+
+To maintain standard compliance and keep the CLI lightweight:
+
+### 1. Template Integrity
+If you are adding or editing project templates:
+*   Ensure that templates are fully functional and build cleanly out-of-the-box.
+*   Place external dependencies inside `deps.json` instead of adding them static-style.
+*   Confirm that all runtime script names and files are fully cross-platform compatible (work seamlessly across Windows, macOS, and Linux).
+
+### 2. Plugin Standard Design
+If you are creating new feature plugins:
+*   Always include `install` and `uninstall` functions inside your plugin module.
+*   The `uninstall` function must cleanly remove any added files and strip imported code statements to prevent breaking the application structure.
+*   Make sure that your changes are registered cleanly inside the `exon.config.json` helper tracker.

@@ -1,35 +1,100 @@
 ---
-title: Templates & Structure
-description: Understand Exon's built-in framework templates and folder structure
+title: "Project Templates & Scaffolding Architecture - Exon CLI"
+description: "Understand the templates, folder structures, file responsibilities, and scaffolding compilation pipeline utilized by Exon CLI."
 icon: layer-group
+keywords:
+  - express template structure
+  - typescript express project layout
+  - express boilerplate folder structure
+  - node js scaffolding pipeline
+  - customize express templates
 ---
 
-## Available Templates
+# 📂 Project Templates & Directory Layout
 
-Exon ships with ready-made templates under the `templates/` folder for both JavaScript and TypeScript projects, as well as separate Database (DB) templates.
+Exon CLI creates clean, scalable, and standard-compliant folder layouts optimized for both small projects and large, high-traffic production backends.
+
+---
+
+## 🏗️ Supported Template Frameworks
+
+Exon CLI ships with native, optimized layouts located under the `templates/` folder. It maps your chosen language and database seamlessly.
 
 <CardGroup cols={2}>
-  <Card title="Project Templates" icon="folder-tree">
-    - `node-express-template-js` (JavaScript)
-    - `node-express-template-ts` (TypeScript)
+  <Card title="Base Engine Templates" icon="folder-tree">
+    *   `node-express-template-js`: Modern ES Module JavaScript structure.
+    *   `node-express-template-ts`: Type-safe TypeScript layout with pre-configured compilation files.
   </Card>
   <Card title="Database Templates" icon="database">
-    Copied into `src/db` (when selected):
-    - `mongoose/js` | `mongoose/ts`
-    - `prisma/js` | `prisma/ts`
-    - `drizzle/js` | `drizzle/ts`
+    Pre-configured db modules injected into `src/db/`:
+    *   `mongoose`: Ready-to-go MongoDB client bindings.
+    *   `prisma`: Prisma client setups and strict database typing schemas.
+    *   `drizzle`: Drizzle schema bindings and database client connection settings.
   </Card>
 </CardGroup>
 
-## The Generation Flow
+---
 
-During project creation, the Exon CLI automates the following steps:
+## 📂 Production Folder Architecture
 
-1. **Copies Project Template**: Scaffolds the base Express boilerplate.
-2. **Copies DB Template**: Places the selected DB config automatically into `src/db`.
-3. **Merges Dependencies**: Appends contents of `deps.json` into the root `package.json`.
-4. **Appends Environment Variables**: Attaches any data from `env.append` into the local `.env`.
+Regardless of your chosen stack, Exon constructs a unified, easy-to-navigate directory tree. Below is a detailed mapping of file responsibilities in a standard TypeScript project:
 
-## Custom Templates
+```txt
+my-api/
+├── src/
+│   ├── controllers/      # Route controllers (handles incoming requests, parses payloads, returns responses)
+│   ├── routes/           # Routing middleware mappings separating endpoint paths from execution logic
+│   ├── middleware/       # Shared middleware logic (authenticator filters, global exception handlers)
+│   ├── db/               # Database initialization configs and client connection instances
+│   ├── models/           # DB schema modeling structures (Mongoose, Drizzle, or Prisma schemas)
+│   ├── utils/            # Core utilities:
+│   │   ├── apiError.ts   # Centralized error formatting classes for custom HTTP status codes
+│   │   ├── apiResponse.ts# Centralized standard API success structures
+│   │   └── asyncHandler.ts# Safe async try/catch wrapper preventing unhandled promise rejections
+│   ├── socket/           # Realtime Socket.IO servers and connection rooms
+│   ├── app.ts            # Core Express app setup, registering middlewares, plugins, and routings
+│   └── index.ts          # Server entrypoint listening on network ports
+```
 
-If you wish to add your own template or expand an existing one, simply add a folder under `templates/` and follow the matching structure from the standard templates. Provide a `deps.json` and `env.append` if additional dependencies and variables are needed.
+---
+
+## 🔄 The Scaffolding Pipeline
+
+When you execute `exon-cli create <project-name>`, the compiler performs a multi-step compilation process to assemble your final workspace:
+
+```mermaid
+graph TD
+    A[Start CLI Create] --> B[Copy Core Language Template TS or JS]
+    B --> C{Database Selected?}
+    C -- Yes --> D[Copy DB Template into src/db]
+    C -- No --> E[Skip DB Setup]
+    D --> F[Merge DB Dependencies from deps.json]
+    E --> G[Merge Plugin Dependencies]
+    F --> G
+    G --> H[Append Environment variables from env.append]
+    H --> I[Run npm install & Complete]
+```
+
+### 1. Project Base Replication
+Copies the core JavaScript or TypeScript boilerplate matching your primary language choice.
+
+### 2. Database Integration
+If you select Mongoose, Prisma, or Drizzle, Exon pulls the corresponding database templates and copies them directly into the target `src/db` directory.
+
+### 3. Dependency Aggregation (`deps.json`)
+Rather than relying on outdated static list installations, Exon reads the `deps.json` file inside the database or plugin folder and dynamically appends them into your root `package.json` package map before installing.
+
+### 4. Environmental Injection (`env.append`)
+Pulls environment settings (e.g., `DATABASE_URL` configurations or logging profiles) from the template's `env.append` file and appends them cleanly to the root `.env` config file.
+
+---
+
+## 🛠️ Creating Custom Templates
+
+If you wish to extend Exon's default outputs or design your own template styles:
+
+1.  Navigate to the `templates/` directory.
+2.  Add a new folder (e.g., `node-express-template-myframework`).
+3.  Include a `deps.json` file containing any required packages.
+4.  Include an `env.append` file defining any environment variables.
+5.  Exon's internal compiler will automatically parse and merge your files when generated.
