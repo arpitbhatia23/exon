@@ -1,56 +1,100 @@
 ---
-title: Plugins
-description: Extend your project with additional features
+title: "Dynamic Plugin Architecture - Exon CLI"
+description: "Learn how Exon CLI's decoupled plugin system works. Dynamically install or uninstall database ORMs, Swagger documentation, Docker files, and Socket.IO."
 icon: plug
+keywords:
+  - express cli plugins
+  - add swagger express
+  - express generator database plugins
+  - node js plugin framework
+  - socket io express generator
 ---
 
-Exon CLI's plugin system allows you to add or remove core features after your project has been scaffolded. This flexibility ensures that your project can evolve as your requirements change.
+# 🔌 Dynamic Plugin System
 
-## Available Plugins
+A major limitation of traditional Express scaffolders (such as `express-generator`) is their monolithic nature. Once the project is generated, altering the database layer, documentation, or logging system requires extensive manual refactoring.
 
-Currently, Exon supports the following plugins:
+**Exon CLI** solves this by implementing a **decoupled plugin architecture**. Each feature—from the database ORM to realtime WebSockets—is a dynamic plugin. You can add or remove these plugins at any point in your project lifecycle with zero configuration conflicts.
 
-- **docker**: Adds production-ready Docker configuration (Dockerfile, docker-compose.yml).
-- **prisma**: Integrates the Prisma ORM.
-- **mongoose**: Integrates the Mongoose ODM.
-- **drizzle**: Integrates the Drizzle ORM.
-- **logger**: Adds a production-ready logging system with Morgan and Winston.
-- **swagger**: Adds auto-generated Swagger/OpenAPI documentation.
+---
 
-## Managing Plugins
+## 📦 Available Plugins & Details
 
-### Adding a Plugin
+Exon CLI comes pre-loaded with several high-performance plugins tailored for modern node.js development:
 
-To add a plugin to your existing Exon project, run the `add` command from your project's root directory:
+### 🐳 Docker Support (`docker`)
+Generates optimized Docker setups for local development and high-performance containerized hosting.
+*   **Files Added**:
+    *   `Dockerfile`: Multi-stage build target separating build stages from production runs.
+    *   `.dockerignore`: Excludes heavyweight files like `node_modules` or `.env` from contexts.
+    *   `docker-compose.yml`: Local orchestrator binding database services and your API.
+
+### 📝 Swagger OpenAPI Documentation (`swagger`)
+Installs and pre-configures Swagger UI, mapping custom routes and payload schemes directly in a web panel.
+*   **Endpoint**: `/docs`
+*   **Files Added**: `src/routes/swagger.routes.ts` or `.js`, `src/config/swagger.ts` or `.js`
+
+### 🪵 Winston & Morgan Logger (`logger`)
+Adds an enterprise-grade, configurable logging framework replacing unreliable `console.log` statements.
+*   **Transports**: Console log outputs and automated daily rotating file logs.
+*   **Files Added**: `src/utils/logger.ts` or `.js`, integrations in `src/app.ts`
+
+### ⚡ Realtime WebSockets (`socket`)
+Pre-configures a robust **Socket.IO** instance directly attached to your core Express server.
+*   **Files Added**: `src/socket/index.ts` or `.js`
+*   **Capabilities**: Ready-to-go room management, socket connections, and namespace event mapping.
+
+### 🗄️ Database ORMs & ODMs
+Exon CLI offers three first-class database plugin options:
+
+| ORM/ODM | CLI Name | Target Database | Description |
+| :--- | :---: | :---: | :--- |
+| **Prisma** | `prisma` | PostgreSQL, MySQL, SQLite | Advanced type-safe query building and automated migration schemas. |
+| **Mongoose** | `mongoose` | MongoDB | Standard object data modeling for document-based databases. |
+| **Drizzle** | `drizzle` | PostgreSQL, MySQL, SQLite | Lightweight, ultra-fast SQL query execution with type safety. |
+
+---
+
+## 📋 Managing Plugins
+
+### Installing a Feature
+To insert a new feature plugin into an existing Exon project, run the `add` command from your project's root directory:
 
 ```bash
 npx exon-cli add <plugin-name>
 ```
 
-For example, to add Docker support:
+For example, to configure auto-generated Swagger UI docs:
 
 ```bash
-npx exon-cli add docker
+npx exon-cli add swagger
 ```
 
-### Removing a Plugin
+---
 
-If you no longer need a specific feature, you can remove it using the `remove` command:
+### Uninstalling a Feature
+If your project requirements change, you can remove a plugin cleanly. Exon CLI automatically removes the associated files, strips import statements, and resets server configurations:
 
 ```bash
-npx exon-cli remove <plugin-name>
+npx exon-cli remove swagger
 ```
 
-This will remove the associated files and update your project's configuration.
+---
 
-## Project Configuration
+## 🛠️ State Management (`exon.config.json`)
 
-When you create a project or add a plugin, Exon creates or updates an `exon.config.json` file in your project root. This file keeps track of the project's language, database, and installed plugins.
+Exon keeps track of all active features in a lightweight JSON configuration file stored in the root folder of your project. This prevents double installations and manages uninstall cleanups safely.
 
 ```json
 {
-  "language": "typescript",
+  "language": "TypeScript",
   "database": "PRISMA",
-  "plugins": ["docker", "prisma"]
+  "plugins": [
+    "docker",
+    "prisma",
+    "logger",
+    "swagger",
+    "socket"
+  ]
 }
 ```
