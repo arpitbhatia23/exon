@@ -1,30 +1,31 @@
 import path from 'path';
 import type { Plugin } from '../types/index.js';
 import { ROOT_DIR } from '../../core/rootRes.js';
-import { injectLogger } from './injectLogger.js';
+import { injectSocket } from './injectSocket.js';
 import { execSync } from 'node:child_process';
 import fs from 'fs-extra';
-import { removeImport, removeStatement } from '../utils/injectCode.js';
-
-export const loggerPlugin: Plugin = {
-  name: 'logger',
+import {
+  injectImport,
+  removeCode,
+  removeImport,
+  removeStatement,
+  replaceExport,
+  replacePropertyAccess,
+} from '../utils/injectCode.js';
+export const scoketPlugin: Plugin = {
   type: 'feature',
+  name: 'socket',
   shouldRun(context) {
-    return !!context.options?.logger;
+    return !!context.options?.socket;
   },
-  files: [
-    'src/middleware/morgan.middleware.ts',
-    'src/middleware/morgan.middleware.js',
-    'src/utils/logger.ts',
-    'src/utils/logger.js',
-  ],
+  files: ['src/socket/index.js', 'src/socket/index.ts'],
   async run(context) {
-    await injectLogger(context);
+    await injectSocket(context);
   },
   async install(context) {
     const templatedir = path.resolve(
       ROOT_DIR,
-      'plugins/templates/logger',
+      'plugins/templates/socket',
       context.language === 'TypeScript' ? 'ts' : 'js'
     );
 
@@ -49,13 +50,13 @@ export const loggerPlugin: Plugin = {
     }
   },
   async uninstall(context) {
-    const loggerDir = path.resolve(
+    const socketDir = path.resolve(
       ROOT_DIR,
-      'plugins/templates/logger',
+      'plugins/templates/socket',
       context.language === 'TypeScript' ? 'ts' : 'js'
     );
 
-    const depsPath = path.join(loggerDir, 'deps.json');
+    const depsPath = path.join(socketDir, 'deps.json');
 
     if (fs.existsSync(depsPath)) {
       const data = JSON.parse(fs.readFileSync(depsPath, 'utf-8'));
@@ -76,18 +77,34 @@ export const loggerPlugin: Plugin = {
 
     const appPath = path.join(context.targetDir, `src/app.${ext}`);
 
-    const asyncHandlerPath = path.join(context.targetDir, `src/utils/asyncHandler.${ext}`);
-
-    await removeImport(asyncHandlerPath, {
-      defaultImport: 'logger',
-      moduleSpecifier: `./logger${ext === 'js' ? '.js' : ''}`,
-    });
-    await removeStatement(asyncHandlerPath, 'logger.error(error);');
+    console.log(appPath);
     await removeImport(appPath, {
-      moduleSpecifier: `./middleware/morgan.middleware${ext === 'js' ? '.js' : ''}`,
-      defaultImport: 'morganLogger',
+      moduleSpecifier: 'http',
+      defaultImport: 'http',
     });
 
-    await removeStatement(appPath, `app.use(morganLogger);`);
+    await removeImport(appPath, {
+      moduleSpecifier: `./socket/index${ext == 'js' ? '.js' : ''}`,
+      namedImports: ['initSocket'],
+    });
+
+    await removeStatement(appPath, `const server = http.createServer(app);`);
+    await removeStatement(appPath, `initSocket(server);`);
+    await replaceExport(appPath, 'server', 'app');
+
+    const indexpath = path.join(context.targetDir, `src/index${ext === 'js' ? '.js' : '.ts'}`);
+    await injectImport(indexpath, {
+      namedImports: ['app'],
+      moduleSpecifier: `./app${ext === 'js' ? '.js' : ''}`,
+    });
+    await removeImport(indexpath, {
+      namedImports: ['server'],
+      moduleSpecifier: `./app${ext === 'js' ? '.js' : ''}`,
+    });
+    await replacePropertyAccess(indexpath, 'server.listen', 'app.listen');
+
+    await fs.remove(path.join(context.targetDir, 'src/socket'));
+
+    console.log('✅ Socket.IO plugin removed successfully');
   },
 };
